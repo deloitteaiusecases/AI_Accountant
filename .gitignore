@@ -27,3 +27,5 @@ generated_scripts/
 qa_data/
 # sourced policy docs for testing (reproduce via scripts/extract_policy.py)
 policy_samples/
+# 'dump everything' upload bundle (reproduce via scripts/make_bundle.py)
+bundle_test/
