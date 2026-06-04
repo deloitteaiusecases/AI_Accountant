@@ -1,0 +1,11 @@
+# AI Accountant — Python dependencies
+# Pinned to safe lower bounds; pip resolves compatible latest within these.
+
+streamlit>=1.40
+pandas>=2.2
+openpyxl>=3.1          # Excel reading/writing
+openai>=1.60           # OpenAI Python SDK (GPT-5.1)
+python-dotenv>=1.0     # load API key from .env
+PyPDF2>=3.0            # policy PDF text extraction
+reportlab>=4.2         # PDF export
+pydantic>=2.7          # typed schemas for profiles / routing map
