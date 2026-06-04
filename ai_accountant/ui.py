@@ -182,13 +182,24 @@ def _render_flow(result: Note5Result) -> None:
 
 
 def _render_metrics(result: Note5Result) -> None:
-    expected = {line.item: line.expected for line in result.reconciliation}
+    # Only compare against figures STATED IN THE UPLOAD (an L1/L2 the user provided).
+    # If the upload has no such answer key, show the computed value with NO comparison —
+    # never compare against the bundled AMNB sample's numbers.
+    stated: dict[str, float] = {}
+    for section in (result.reconciliation_report or []):
+        if "stated" in section.source:
+            for ln in section.lines:
+                stated.setdefault(ln.item, ln.expected)
+
     cols = st.columns(4)
     for col, bucket in zip(cols, ["FVTPL", "FVOCI", "Amortised Cost", "TOTAL"]):
         value = result.cascade.l1.get(bucket, 0.0)
-        var = value - expected.get(bucket, value)
-        delta = "matches FS" if var == 0 else f"{var:+,.0f} vs FS"
-        col.metric(bucket, _fmt(value), delta, delta_color="off" if var == 0 else "inverse")
+        if bucket in stated:
+            var = value - stated[bucket]
+            delta = "matches FS" if var == 0 else f"{var:+,.0f} vs stated FS"
+            col.metric(bucket, _fmt(value), delta, delta_color="off" if var == 0 else "inverse")
+        else:
+            col.metric(bucket, _fmt(value))  # no answer key in the upload → no comparison
 
 
 def _style_recon(df: pd.DataFrame):
