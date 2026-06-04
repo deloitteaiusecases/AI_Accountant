@@ -31,3 +31,5 @@ policy_samples/
 bundle_test/
 # clean accuracy-test dataset (reproduce via scripts/make_accuracy_test.py)
 accuracy_test/
+# structured test-case library (reproduce via scripts/make_test_documents.py)
+test_documents/
