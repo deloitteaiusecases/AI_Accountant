@@ -163,6 +163,30 @@ def _movements_by_bucket(tables: list[DetectedTable]) -> dict[str, float]:
     return mv
 
 
+def _build_l2_summary(l3: pd.DataFrame) -> pd.DataFrame:
+    """Detailed Note 5.1-style classification summary: each holding within its bucket, with a
+    subtotal per classification and a grand total (not just coarse bucket totals)."""
+    name_col = ("Security_Name" if "Security_Name" in l3.columns
+                else "Holding_ID" if "Holding_ID" in l3.columns else None)
+    rows: list[dict] = []
+    grand = 0.0
+    for bucket in _BUCKETS:
+        sub = l3[l3["Bucket"] == bucket]
+        if sub.empty:
+            continue
+        for _, r in sub.iterrows():
+            rows.append({
+                "Classification": bucket,
+                "Sub-Category": str(r[name_col]) if name_col else "",
+                "Amount (SAR '000)": float(pd.to_numeric(r["Carrying_Value_000"], errors="coerce") or 0),
+            })
+        bt = float(pd.to_numeric(sub["Carrying_Value_000"], errors="coerce").sum())
+        rows.append({"Classification": bucket, "Sub-Category": "TOTAL", "Amount (SAR '000)": bt})
+        grand += bt
+    rows.append({"Classification": "GRAND TOTAL", "Sub-Category": "", "Amount (SAR '000)": grand})
+    return pd.DataFrame(rows, columns=["Classification", "Sub-Category", "Amount (SAR '000)"])
+
+
 def compute_cascade(tables: list[DetectedTable]) -> CascadeResult:
     """Run the cascade and return computed L1/L2/L3 + L4 summary."""
     notes: list[str] = []
@@ -178,10 +202,7 @@ def compute_cascade(tables: list[DetectedTable]) -> CascadeResult:
         l3_source = "L3 sub-ledger (as provided)"
         by_bucket = l3.groupby("Bucket")["Carrying_Value_000"].sum()
         l1 = {b: float(by_bucket.get(b, 0.0)) for b in _BUCKETS}
-        l2_classification = (
-            l3.groupby(["Bucket", "Classification"])["Carrying_Value_000"].sum()
-            .reset_index().rename(columns={"Carrying_Value_000": "Carrying_Value_000_SAR000"})
-        )
+        l2_classification = _build_l2_summary(l3)
     else:
         opening = _opening_by_bucket(tables)
         l3_recon, recon_notes = _reconstruct_l3_from_l4(tables)
@@ -213,10 +234,7 @@ def compute_cascade(tables: list[DetectedTable]) -> CascadeResult:
             partial = True
             by_bucket = l3.groupby("Bucket")["Carrying_Value_000"].sum()
             l1 = {b: float(by_bucket.get(b, 0.0)) for b in _BUCKETS}
-            l2_classification = (
-                l3.groupby(["Bucket", "Classification"])["Carrying_Value_000"].sum()
-                .reset_index().rename(columns={"Carrying_Value_000": "Carrying_Value_000_SAR000"})
-            )
+            l2_classification = _build_l2_summary(l3)
 
     l1["TOTAL"] = float(sum(l1[b] for b in _BUCKETS))
 
