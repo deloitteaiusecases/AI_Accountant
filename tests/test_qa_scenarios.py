@@ -77,6 +77,29 @@ def test_sample_has_cross_source_control():
     assert any("Cross-source" in c.name for c in res.confidence.controls)
 
 
+def test_clean_l4_reconstructs_exactly():
+    """On clean, internally-consistent L4 (fresh period), L1 ties out exactly.
+
+    FVTPL carrying = final MtM fair value; Amortised Cost carrying = cost + amortisation.
+    """
+    csv_text = (
+        "L4-A: PURCHASES\n"
+        "Txn_ID,Holding_ID,Classification,Total_Cost_000\n"
+        "PUR-1,TPL-1,FVTPL,500000\n"
+        "PUR-2,AC-1,AC,1000000\n\n"
+        "L4-D: MTM\n"
+        "Reval_ID,Holding_ID,New_FV_000,MtM_Change_000\n"
+        "REV-1,TPL-1,510000,10000\n\n"
+        "L4-E: AMORT\n"
+        "Amort_ID,Holding_ID,Monthly_Amort_000\n"
+        "AMT-1,AC-1,5000\n"
+    )
+    res = run_note5_from_files([U("clean.csv", csv_text.encode("utf-8"))])
+    assert res.cascade.l1["FVTPL"] == 510_000             # cost 500k -> final FV 510k
+    assert res.cascade.l1["Amortised Cost"] == 1_005_000  # cost 1,000k + amort 5k
+    assert res.cascade.l1["TOTAL"] == 1_515_000
+
+
 if __name__ == "__main__":
     failures = 0
     for name, fn in sorted(globals().items()):

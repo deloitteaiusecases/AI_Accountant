@@ -29,3 +29,5 @@ qa_data/
 policy_samples/
 # 'dump everything' upload bundle (reproduce via scripts/make_bundle.py)
 bundle_test/
+# clean accuracy-test dataset (reproduce via scripts/make_accuracy_test.py)
+accuracy_test/
