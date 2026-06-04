@@ -110,6 +110,18 @@ def _reconstruct_l3_from_l4(tables: list[DetectedTable]) -> tuple[pd.DataFrame |
         return base
 
     holdings["Carrying_Value_000"] = holdings.apply(carry, axis=1)
+
+    # Attach a readable security name from the L4 tables where available (richer sub-ledger).
+    name_map: dict[str, str] = {}
+    for src in (df, m, e):
+        if src is not None and "Security" in src.columns and "Holding_ID" in src.columns:
+            for hid, sec in zip(src["Holding_ID"].astype(str), src["Security"].astype(str)):
+                hid, sec = hid.strip(), sec.strip()
+                if hid and sec and hid not in name_map:
+                    name_map[hid] = sec
+    if name_map:
+        holdings["Security_Name"] = holdings["Holding_ID"].astype(str).str.strip().map(name_map)
+
     note = (
         "No L3 sub-ledger provided — holdings were rebuilt from L4 transactions. Results reflect "
         "only the transactions in this file and EXCLUDE opening balances, so totals are partial. "

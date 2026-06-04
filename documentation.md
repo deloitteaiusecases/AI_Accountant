@@ -95,6 +95,23 @@ sheets** (`cascade._collect_by_cols`) before aggregation — so data split anywh
 ---
 
 ## Changelog
+### 2026-06-04 — Export fixes (user feedback) + richer L4-only sub-ledger
+- **Excel now includes the uploaded source tables** (incl. every L4 transaction table) as its own
+  sheet, alongside the computed L1/L2/L3/Reconciliation/Confidence. Sheet names sanitized/uniqued
+  (`_unique_sheet_name`). For an L4-only upload the workbook now has L4-A…L4-G sheets.
+- **PDF now covers all levels**, not just L1: added an **L3 sub-ledger** table (truncated) and an
+  **L4 transactions** section (a capped preview of each detected L4 table) — with "full detail in
+  the Excel export" notes. Previews truncate cols/cells to fit the page.
+- **Richer reconstructed L3:** when only L4 is uploaded, the rebuilt sub-ledger now carries a
+  **Security_Name** pulled from the L4 tables (purchases/MtM/EIR), so it's not just IDs.
+- **Note on L4-only detail:** with only L4, L3 can't have columns that never existed in the data
+  (ISIN, Issuer, Currency, Coupon%, Maturity…); those only appear when an L3 sub-ledger is uploaded.
+  The L2 summary is a bucket rollup (sub-category granularity needs L3 metadata).
+- **Ops:** found/killed stale Streamlit servers (two running since 6/2 served old code → "disabled
+  export" confusion); standardized on launching from the venv on port 8501. Gitignored run.log/err.
+- **Tests:** `test_export.py` extended — L4-only Excel round-trips all source tables; L4-only PDF
+  is substantially larger (has L3+L4). **34 tests across 9 files, all green.**
+
 ### 2026-06-04 — Phase 5 COMPLETE: Excel & PDF export
 - **`export/excel.py`** (openpyxl): multi-sheet workbook — Note 5 (L1) · Classification (L2) ·
   Sub-ledger (L3) · Reconciliation (if an answer key was uploaded) · Confidence. Returns bytes.

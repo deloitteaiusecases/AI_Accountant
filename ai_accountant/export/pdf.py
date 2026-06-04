@@ -46,6 +46,19 @@ def _table(data: list[list[str]], col_widths=None, highlight_status_col: int | N
     return t
 
 
+def _truncate(s, n: int = 18) -> str:
+    s = str(s)
+    return s if len(s) <= n else s[: n - 1] + "…"
+
+
+def _preview(headers, records, max_rows: int = 10, max_cols: int = 6):
+    """A compact preview table (capped rows/cols, truncated cells) that fits the page."""
+    cols = list(headers)[:max_cols]
+    head = [_truncate(c, 16) for c in cols]
+    body = [[_truncate(rec.get(c, "")) for c in cols] for rec in records[:max_rows]]
+    return _table([head] + body)
+
+
 def export_to_pdf(result: Any) -> bytes:
     from io import BytesIO
 
@@ -78,6 +91,37 @@ def export_to_pdf(result: Any) -> bytes:
                  for c, v in zip(head, row)] for row in l2.itertuples(index=False)]
         story.append(_table([head] + body))
         story.append(Spacer(1, 10))
+
+    # L3 sub-ledger (holdings) — truncated; full detail lives in the Excel export.
+    l3 = result.cascade.l3_holdings
+    if l3 is not None and not l3.empty:
+        story.append(Paragraph("Sub-ledger (L3) — holdings", styles["Heading3"]))
+        cols = [c for c in ["Holding_ID", "Security_Name", "Classification",
+                            "Carrying_Value_000", "Fair_Value_000"] if c in l3.columns] \
+            or list(l3.columns)[:6]
+        head = [_truncate(c, 16) for c in cols]
+        body = [[_fmt(v) if "000" in str(c) else _truncate(v) for c, v in zip(cols, r)]
+                for r in l3[cols].head(40).itertuples(index=False)]
+        story.append(_table([head] + body))
+        if len(l3) > 40:
+            story.append(Paragraph(f"… {len(l3) - 40} more holdings (full detail in the Excel export).",
+                                   styles["Italic"]))
+        story.append(Spacer(1, 10))
+
+    # L4 transactions — a preview of each detected transaction table.
+    l4_tables = [t for t in getattr(result, "tables", []) if t.level == "L4" and t.records]
+    if l4_tables:
+        story.append(Paragraph("Transactions (L4)", styles["Heading2"]))
+        for t in l4_tables:
+            story.append(Paragraph(t.title or "L4 table", styles["Heading4"]))
+            try:
+                story.append(_preview(t.headers, t.records))
+            except Exception:  # noqa: BLE001 - never let one table break the PDF
+                story.append(Paragraph("(table preview unavailable)", styles["Italic"]))
+            if len(t.records) > 10:
+                story.append(Paragraph(f"… {len(t.records) - 10} more rows (full detail in the Excel export).",
+                                       styles["Italic"]))
+            story.append(Spacer(1, 6))
 
     # Reconciliation (only when an answer key was uploaded)
     recon_rows = [

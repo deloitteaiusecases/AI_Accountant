@@ -7,12 +7,27 @@ and the confidence controls. Returns the .xlsx as bytes for st.download_button.
 from __future__ import annotations
 
 import io
+import re
 from typing import Any
 
 import pandas as pd
 
 _L3_COLS = ["Holding_ID", "Security_Name", "Issuer", "Classification",
             "Currency", "Carrying_Value_000", "Fair_Value_000", "Maturity"]
+
+_INVALID_SHEET_CHARS = re.compile(r"[:\\/?*\[\]]")
+
+
+def _unique_sheet_name(base: str, used: set[str]) -> str:
+    """Excel sheet names: <=31 chars, no : \\ / ? * [ ], and unique."""
+    name = _INVALID_SHEET_CHARS.sub(" ", str(base)).strip() or "table"
+    name = name[:31]
+    candidate, i = name, 1
+    while candidate.lower() in {u.lower() for u in used}:
+        suffix = f" ({i})"
+        candidate = name[:31 - len(suffix)] + suffix
+        i += 1
+    return candidate
 
 
 def build_sheets(result: Any) -> dict[str, pd.DataFrame]:
@@ -45,6 +60,16 @@ def build_sheets(result: Any) -> dict[str, pd.DataFrame]:
             [{"Control": c.name, "Status": c.status, "Detail": c.detail}
              for c in conf.controls]
         )
+
+    # Source tables exactly as detected/uploaded (full detail) — incl. the L4 transactions.
+    used = set(sheets)
+    for t in getattr(result, "tables", []) or []:
+        if not t.records:
+            continue
+        base = f"{t.level or 'src'} - {t.title or (t.headers[0] if t.headers else 'table')}"
+        name = _unique_sheet_name(base, used)
+        used.add(name)
+        sheets[name] = t.df
     return sheets
 
 

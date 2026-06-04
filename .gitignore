@@ -17,5 +17,8 @@ Thumbs.db
 
 # App artifacts
 *.log
+*.err
+run.log
+run.err
 .streamlit/secrets.toml
 generated_scripts/      # pinned AI-generated scripts cache (Phase 4)
