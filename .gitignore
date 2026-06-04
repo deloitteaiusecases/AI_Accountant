@@ -15,10 +15,15 @@ Thumbs.db
 .vscode/
 .idea/
 
-# App artifacts
+# App artifacts (gitignore does NOT allow inline comments on a pattern line)
 *.log
 *.err
 run.log
 run.err
 .streamlit/secrets.toml
-generated_scripts/      # pinned AI-generated scripts cache (Phase 4)
+# pinned AI-generated scripts cache (Phase 4)
+generated_scripts/
+# generated QA test files (reproduce via scripts/qa_suite.py)
+qa_data/
+# sourced policy docs for testing (reproduce via scripts/extract_policy.py)
+policy_samples/

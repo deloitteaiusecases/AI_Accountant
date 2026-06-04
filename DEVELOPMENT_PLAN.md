@@ -215,7 +215,11 @@ active note's definition instead of hardcoding Note 5 (behavior byte-identical; 
 **Tasks:** full subprocess/OS-level sandbox; secrets management; performance tuning; deployment config.
 **Trigger:** revisit when deploy target changes from "local desktop only."
 
-## Phase 8 — End-to-end QA with synthetic test data (final, user-requested)
+## Phase 8 — End-to-end QA with synthetic test data (final, user-requested)  🟡 STARTED
+**Status:** `scripts/qa_suite.py` generates + runs a 10-scenario multi-format battery (CSV/Excel,
+multi-file, multi-sheet, multi-table, adjacent, foreign columns, L4-only, L4+opening, missing
+class, 300k-row streamed) — **0 errors**. Policy pipeline validated on real + template policy docs.
+Remaining: turn key scenarios into permanent pytest assertions; broaden adversarial/edge cases.
 **Goal:** After all feature phases, exhaustively exercise every capability with realistic,
 adversarial inputs — the "make many test files" pass the user asked for.
 **Tasks:**
@@ -252,9 +256,14 @@ Nothing here is silently broken in the UI — each is labelled/disabled so it ne
 - **Arbitrary / customer-specific policy hardening** — any uploaded policy's rules already drive
   classification; harden so a *completely different* policy reliably reshapes the calculations
   (broader extraction, conflict handling, validation vs the policy). → **Phase 3 ext.**
-- **Complex / scanned / DOCX policy docs (LLMWhisperer)** — PyPDF2 handles clean text PDFs only;
-  DOCX removed from the uploader (was unsupported). Add LLMWhisperer behind `parse_policy_document`.
-  **Needs real policy docs to build + test.** → **Phase 3 ext.**
+- **Complex / scanned / DOCX policy docs (LLMWhisperer)** — ⓘ PyPDF2 **validated on a real
+  text-based bank PDF** (Bank AlJazira → 20 rules via the pipeline), so LLMWhisperer is only needed
+  for **scanned/image/complex-layout** PDFs (none encountered yet) and DOCX. Add behind
+  `parse_policy_document` when such a doc appears. → **Phase 3 ext.**
+- **Arbitrary-policy hardening** — QA showed policy matching is exact-substring (brittle); needs
+  fuzzy/semantic asset_type → security matching so a policy reliably reshapes calculations. → **Phase 3 ext.**
+- **Streamed large-file confidence** — the streaming path skips internal controls (confidence
+  "Unknown"); run controls on streamed aggregates too. → **Phase 4b ext.**
 - **PDF-as-data ingestion** (tables *inside* PDFs as input data) — inputs are CSV/Excel today. → **Phase 3 ext / LLMWhisperer.**
 
 ### Left over from Phase 4 (validation) ✅ core done

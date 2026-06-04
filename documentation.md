@@ -95,6 +95,25 @@ sheets** (`cascade._collect_by_cols`) before aggregation — so data split anywh
 ---
 
 ## Changelog
+### 2026-06-04 — Phase 8 QA battery + policy docs sourced & validated
+- **`scripts/qa_suite.py`**: generates a multi-format test battery into `qa_data/` (gitignored)
+  and runs each scenario. **10 scenarios, 0 errors:** full multi-level; L4-only (partial/Medium);
+  L3-only; **L4 split across 3 files** (== L4-only → multi-file merge works); **foreign column
+  names** (normalized); opening+L4 (complete); **missing classifications** (38 auto-classified via
+  IFRS 9); **adjacent tables, no blank line**; **multi-sheet Excel**; **300k-row streamed** file.
+- **QA findings:** (a) missing-classifications shows IFRS 9 reclassifies sukuks as FVOCI when no
+  policy says hold-to-maturity → demonstrates *why policy upload matters*; (b) the streamed
+  large-file path reports confidence "Unknown" (skips internal controls) — small gap to note.
+- **Policy docs sourced & validated** (`scripts/extract_policy.py`, `scripts/test_policy_samples.py`;
+  saved to `policy_samples/`, gitignored):
+  - Extracted the **real Bank AlJazira** investment-classification text from the bundled PDF →
+    `extract_policy_rules` produced **20 rules**. **PyPDF2 was sufficient** for this text PDF →
+    LLMWhisperer only needed for scanned/image/complex PDFs (none hit yet).
+  - Added a generic **IFRS 9 policy template** (from web search) → **14 rules**.
+  - Finding: policy matching is exact-substring (brittle); fuzzy/semantic matching is the
+    "arbitrary-policy hardening" deferred item.
+- Scripts committed; generated `qa_data/` + `policy_samples/` gitignored. 38 unit tests still green.
+
 ### 2026-06-04 — Phase 6 (part 1): note-definition framework
 - New **`ai_accountant/notes/`** package: `NoteDefinition` (note_id, title, buckets,
   classification_map, value_column, l1_label_map, gl_accounts) + `registry` (NOTE5, NOTE_REGISTRY,
