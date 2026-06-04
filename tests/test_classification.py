@@ -49,6 +49,17 @@ def test_policy_overrides_ifrs9():
     assert classify("Saudi Govt Sukuk 2030").classification == "FVOCI"
 
 
+def test_fuzzy_policy_match_beats_exact_substring():
+    # Rule wording differs from the security name, but tokens overlap -> still matches policy.
+    rules = [{"asset_type": "government sukuk held to maturity",
+              "classification": "Amortised Cost", "reason": "bank policy"}]
+    d = classify("Saudi Govt Sukuk 2028 held to maturity", rules)
+    assert d.classification == "Amortised Cost"
+    assert d.source == "policy"
+    # An unrelated security still falls through to IFRS 9 (no false match).
+    assert classify("Al Rajhi Bank Shares", rules).source == "IFRS 9"
+
+
 def test_normalize_labels():
     assert normalize_classification("FVIS") == "FVTPL"
     assert normalize_classification("Held at FVOCI") == "FVOCI"

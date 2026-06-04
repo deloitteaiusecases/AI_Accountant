@@ -112,4 +112,7 @@ def _try_stream_single_file(file: Any) -> Note5Result | None:
         note="Note 5: Investments", used_in_cascade=True, confidence="rule",
     )], reasoning="Large single-table file streamed in chunks.")
     recon = reconcile_l1(cascade.l1)
-    return Note5Result([placeholder], cascade, recon, all_match(recon), routing)
+    from ai_accountant.validation.controls import run_streamed_controls
+    confidence = run_streamed_controls(cascade)
+    return Note5Result([placeholder], cascade, recon, all_match(recon), routing,
+                       confidence=confidence)

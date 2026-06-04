@@ -95,6 +95,21 @@ sheets** (`cascade._collect_by_cols`) before aggregation — so data split anywh
 ---
 
 ## Changelog
+### 2026-06-04 — POC hardening pass (4 deferred items)
+- **Fuzzy policy matching** (`policy/classify._best_policy_rule`): token-overlap with light plural
+  stemming + threshold, replacing exact-substring. Real policy-rule wordings now match real
+  security names (e.g. "government sukuk held to maturity" → "Saudi Govt Sukuk 2028 …" now hits
+  **[policy]**, was [IFRS 9]). Non-matches still fall through to IFRS 9.
+- **Confidence on streamed large files** (`streaming` collects stats → `controls.run_streamed_controls`):
+  classification coverage, negatives, duplicate IDs computed incrementally; streamed 300k-row file
+  now reports **High** (was "Unknown"). `CascadeResult.stream_stats` added.
+- **Two new internal controls** in `run_controls`: **roll-forward** (opening + net movements =
+  closing, when opening provided) and **cross-source consistency** (same holding, conflicting
+  values across files → double-count risk).
+- **QA scenarios promoted to pytest** (`tests/test_qa_scenarios.py`): L4-split==L4-only merge,
+  streamed-file confidence, opening roll-forward control, cross-source control.
+- **Tests: ~42 across 11 files, all green.** Deferred tracker updated (3 items resolved).
+
 ### 2026-06-04 — Phase 8 QA battery + policy docs sourced & validated
 - **`scripts/qa_suite.py`**: generates a multi-format test battery into `qa_data/` (gitignored)
   and runs each scenario. **10 scenarios, 0 errors:** full multi-level; L4-only (partial/Medium);

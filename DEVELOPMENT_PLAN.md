@@ -260,18 +260,19 @@ Nothing here is silently broken in the UI — each is labelled/disabled so it ne
   text-based bank PDF** (Bank AlJazira → 20 rules via the pipeline), so LLMWhisperer is only needed
   for **scanned/image/complex-layout** PDFs (none encountered yet) and DOCX. Add behind
   `parse_policy_document` when such a doc appears. → **Phase 3 ext.**
-- **Arbitrary-policy hardening** — QA showed policy matching is exact-substring (brittle); needs
-  fuzzy/semantic asset_type → security matching so a policy reliably reshapes calculations. → **Phase 3 ext.**
-- **Streamed large-file confidence** — the streaming path skips internal controls (confidence
-  "Unknown"); run controls on streamed aggregates too. → **Phase 4b ext.**
+- ~~**Arbitrary-policy hardening** (exact-substring matching)~~ → ✅ **DONE** — fuzzy token-overlap
+  matching (`policy/classify._best_policy_rule`); real rule wordings now match real security names.
+  *(Still later: deeper semantic/LLM matching for very different wordings.)*
+- ~~**Streamed large-file confidence**~~ → ✅ **DONE** — streaming collects control stats and
+  `run_streamed_controls` builds a confidence report (was "Unknown", now High/Medium/Low).
 - **PDF-as-data ingestion** (tables *inside* PDFs as input data) — inputs are CSV/Excel today. → **Phase 3 ext / LLMWhisperer.**
 
 ### Left over from Phase 4 (validation) ✅ core done
 - ~~**Production validation without an answer key (Phase 4b)**~~ → ✅ **DONE.** Confidence engine
   (`validation/controls.py`): orphan txns, classification coverage, double-entry, sub-ledger↔GL,
   duplicate IDs, negatives → High/Medium/Low. Ground-truth comparison now sample-only (real uploads
-  judged by confidence, not the AMNB numbers). *Still to add later:* roll-forward (opening+flows vs
-  aggregation) and cross-source consistency as extra controls.
+  judged by confidence, not the AMNB numbers). **Hardening pass added:** roll-forward
+  (opening+movements = closing), cross-source consistency, and confidence on streamed large files.
 - **Editable routing map** + **per-level reconciliation vs stated L3** → with AI codegen.
 
 ### Belongs to phases not yet reached (not deferrals — just upcoming)

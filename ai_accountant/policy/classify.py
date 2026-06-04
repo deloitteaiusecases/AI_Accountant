@@ -11,6 +11,7 @@ states a classification, the data is authoritative and is never overridden.
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -67,17 +68,55 @@ def normalize_classification(label: str) -> str:
     return label  # leave unrecognized labels untouched
 
 
+# Tokens too generic to anchor a policy match on their own.
+_STOP = {"and", "for", "with", "the", "within", "using", "valued", "model", "investment",
+         "investments", "instrument", "instruments", "type", "various", "designated", "held"}
+_POLICY_MATCH_THRESHOLD = 0.5  # fraction of a rule's significant tokens that must appear
+
+
+def _tokens(text: str) -> set[str]:
+    """Significant tokens (len>=3, not stopwords), with a light plural stem."""
+    out = set()
+    for tok in re.split(r"[^a-z0-9]+", str(text).lower()):
+        if len(tok) < 3 or tok in _STOP:
+            continue
+        if tok.endswith("s") and len(tok) > 3:   # funds -> fund, bonds -> bond
+            tok = tok[:-1]
+        out.add(tok)
+    return out
+
+
+def _best_policy_rule(description: str, policy_rules: list[dict]) -> dict | None:
+    """Best policy rule for a security by token overlap (fuzzy, not exact-substring).
+
+    Score = shared significant tokens / the rule's significant tokens. The highest-scoring rule
+    at or above the threshold wins. This lets e.g. a rule for 'government sukuk held to maturity'
+    match a security named 'Saudi Govt Sukuk 2028 (held to maturity)'.
+    """
+    desc_tokens = _tokens(description)
+    if not desc_tokens:
+        return None
+    best, best_score = None, 0.0
+    for rule in policy_rules:
+        rule_tokens = _tokens(rule.get("asset_type", ""))
+        if not rule_tokens:
+            continue
+        score = len(rule_tokens & desc_tokens) / len(rule_tokens)
+        if score > best_score:
+            best, best_score = rule, score
+    return best if best_score >= _POLICY_MATCH_THRESHOLD else None
+
+
 def classify(description: str, policy_rules: list[dict] | None = None) -> ClassificationDecision:
     """Classify one security by its description, policy first then IFRS 9 fallback."""
     desc = str(description).lower()
 
-    # 1) Policy rules (authoritative when present).
-    for rule in policy_rules or []:
-        asset_type = str(rule.get("asset_type", "")).strip().lower()
-        if asset_type and asset_type in desc:
-            cls = normalize_classification(rule.get("classification", ""))
-            reason = rule.get("reason") or f"Matches policy rule for '{asset_type}'"
-            return ClassificationDecision(cls, reason, "policy")
+    # 1) Policy rules (authoritative when present) — fuzzy token match.
+    rule = _best_policy_rule(description, policy_rules or [])
+    if rule is not None:
+        cls = normalize_classification(rule.get("classification", ""))
+        reason = rule.get("reason") or f"Matches policy rule for '{rule.get('asset_type')}'"
+        return ClassificationDecision(cls, reason, "policy")
 
     # 2) IFRS 9 inference.
     for keywords, cls, reason in _IFRS9_RULES:

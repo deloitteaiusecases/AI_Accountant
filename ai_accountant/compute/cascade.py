@@ -35,6 +35,7 @@ class CascadeResult:
     l4_summary: dict[str, Any] = field(default_factory=dict)
     notes: list[str] = field(default_factory=list)
     partial: bool = False                # True when results may be incomplete
+    stream_stats: dict[str, Any] = field(default_factory=dict)  # control stats from streaming
 
 
 def _num(series: pd.Series) -> pd.Series:

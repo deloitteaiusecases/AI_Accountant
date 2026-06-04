@@ -203,6 +203,86 @@ def run_controls(tables, cascade: CascadeResult) -> ConfidenceReport:
             negs[:25],
         ))
 
+    # 7) Roll-forward — opening + net movements should equal the computed closing (if opening given).
+    from ai_accountant.compute.cascade import _movements_by_bucket, _opening_by_bucket
+    opening = _opening_by_bucket(tables)
+    if opening:
+        movements = _movements_by_bucket(tables)
+        mism = []
+        for b in ("FVTPL", "FVOCI", "Amortised Cost"):
+            expected = opening.get(b, 0.0) + movements.get(b, 0.0)
+            actual = float(cascade.l1.get(b, 0.0))
+            if abs(actual - expected) > 1.0:
+                mism.append({"bucket": b, "opening_plus_movements": expected, "closing": actual,
+                             "reason": "Closing does not equal opening + net L4 movements."})
+        controls.append(ControlResult(
+            "Roll-forward (opening + movements = closing)",
+            "pass" if not mism else "warn",
+            "Closing ties to opening + net L4 movements per classification." if not mism
+            else "Roll-forward mismatch in one or more buckets.",
+            mism,
+        ))
+
+    # 8) Cross-source consistency — a holding must not carry different values across sources.
+    val_by_holding: dict[str, set] = {}
+    for t in tables:
+        if not t.has_columns("Holding_ID", "Carrying_Value_000"):
+            continue
+        for rec in t.records:
+            hid = str(rec.get("Holding_ID", "")).strip()
+            if hid:
+                val_by_holding.setdefault(hid, set()).add(round(_num(rec.get("Carrying_Value_000", "")), 2))
+    if val_by_holding:
+        conflicts = [{"holding": h, "values": sorted(vs),
+                      "reason": "Same holding appears with different carrying values across sources "
+                                "(risk of double-counting)."}
+                     for h, vs in val_by_holding.items() if len(vs) > 1]
+        controls.append(ControlResult(
+            "Cross-source consistency",
+            "pass" if not conflicts else "warn",
+            "No holding has conflicting values across sources." if not conflicts
+            else f"{len(conflicts)} holding(s) have conflicting carrying values across sources.",
+            conflicts[:25],
+        ))
+
+    return ConfidenceReport(controls)
+
+
+def run_streamed_controls(cascade: CascadeResult) -> ConfidenceReport:
+    """Confidence report for the streamed large-file path, from incrementally-collected stats.
+
+    Only the controls computable in a single streaming pass over a holdings file apply
+    (classification coverage, negatives, duplicate IDs). Transaction-level controls (orphans,
+    double-entry, GL tie-out) need L4 tables, which a streamed holdings file doesn't carry.
+    """
+    s = cascade.stream_stats or {}
+    rows = int(s.get("rows", 0))
+    controls = [
+        ControlResult(
+            "Completeness — classification coverage",
+            "pass" if not s.get("missing_class") else "warn",
+            f"All {rows:,} holdings are classified." if not s.get("missing_class")
+            else f"{s['missing_class']} of {rows:,} holdings lack a classification.",
+        ),
+        ControlResult(
+            "No negative carrying values",
+            "pass" if not s.get("negatives") else "warn",
+            "All carrying values are non-negative." if not s.get("negatives")
+            else f"{s['negatives']} holding(s) have a negative carrying value.",
+        ),
+        ControlResult(
+            "No duplicate holding IDs",
+            "pass" if not s.get("duplicate_ids") else "warn",
+            "All holding IDs are unique." if not s.get("duplicate_ids")
+            else f"{s['duplicate_ids']} duplicate holding ID(s) found.",
+        ),
+        ControlResult(
+            "Streamed processing",
+            "pass",
+            f"Processed {rows:,} holdings in memory-bounded chunks. Transaction-level controls "
+            "(orphans, double-entry, GL tie-out) need L4 data and are not applicable here.",
+        ),
+    ]
     return ConfidenceReport(controls)
 
 

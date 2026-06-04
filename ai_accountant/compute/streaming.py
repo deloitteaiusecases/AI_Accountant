@@ -28,6 +28,11 @@ def stream_cascade_from_csv(file_or_path: Any, chunksize: int = 100_000) -> Casc
     rows_seen = 0
     chunks_seen = 0
     head_sample: pd.DataFrame | None = None
+    # Control stats accumulated incrementally (so we can run confidence checks on big files).
+    missing_class = 0
+    negatives = 0
+    seen_ids: set[str] = set()
+    dup_ids = 0
 
     for chunk in iter_csv_chunks(file_or_path, chunksize=chunksize):
         chunks_seen += 1
@@ -39,6 +44,16 @@ def stream_cascade_from_csv(file_or_path: Any, chunksize: int = 100_000) -> Casc
         rows_seen += len(chunk)
         if head_sample is None:
             head_sample = chunk.head(10).copy()
+
+        missing_class += int(chunk["Classification"].astype(str).str.strip().eq("").sum())
+        negatives += int((chunk["Carrying_Value_000"] < 0).sum())
+        if "Holding_ID" in chunk.columns:
+            for hid in chunk["Holding_ID"].astype(str):
+                if hid in seen_ids:
+                    dup_ids += 1
+                else:
+                    seen_ids.add(hid)
+
         for (bucket, cls), val in chunk.groupby(["Bucket", "Classification"])[
             "Carrying_Value_000"
         ].sum().items():
@@ -63,4 +78,8 @@ def stream_cascade_from_csv(file_or_path: Any, chunksize: int = 100_000) -> Casc
         notes=[f"Large file processed in {chunks_seen} memory-bounded chunks "
                f"({rows_seen:,} holdings); sub-ledger shown is a sample of the first rows."],
         partial=False,
+        stream_stats={
+            "rows": rows_seen, "missing_class": missing_class,
+            "negatives": negatives, "duplicate_ids": dup_ids,
+        },
     )
