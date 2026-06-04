@@ -16,8 +16,9 @@ from dataclasses import dataclass, field
 import pandas as pd
 
 from ai_accountant.config import NOTE5_GROUND_TRUTH
+from ai_accountant.notes.registry import DEFAULT_NOTE as _NOTE
 
-_BUCKETS = ("FVTPL", "FVOCI", "Amortised Cost", "TOTAL")
+_BUCKETS = _NOTE.bucket_order  # (FVTPL, FVOCI, Amortised Cost, TOTAL)
 
 
 @dataclass
@@ -95,11 +96,7 @@ def _stated_l1(tables) -> dict[str, float] | None:
     t = _find(tables, "BS_Line")
     if t is None:
         return None
-    label_map = {
-        "fvtpl": "FVTPL", "fvoci": "FVOCI",
-        "amortised cost": "Amortised Cost", "amortized cost": "Amortised Cost",
-        "total": "TOTAL",
-    }
+    label_map = _NOTE.l1_label_map
     out: dict[str, float] = {}
     for rec in t.records:
         label = str(rec.get("BS_Line", "")).lower()

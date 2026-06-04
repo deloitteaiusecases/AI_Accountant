@@ -35,6 +35,29 @@ real-world inputs. Built per the decisions below.
 
 ---
 
+## Product end-state (POST-POC) — intelligent multi-note FS from an UNLABELED file set
+> POC scope is **Note 5 only**. This section records the full target so we build toward it.
+
+When complete, the user uploads a **set of files with no indication of which note they belong to**,
+and the system assembles the **whole Financial Statement** itself:
+1. **Ingest** (built): detect all tables across all files/sheets, normalize columns, detect levels.
+2. **Note dispatch (THE new intelligence — future):** for every detected table, decide *which
+   note(s) it feeds*, by matching its **profile** (headers + sample rows) against the **catalog of
+   `NoteDefinition`s**. Rule signatures per note + LLM reasoning over profiles (never raw rows),
+   since the documents are unlabeled and messy. Output = a per-note data bundle.
+3. **Per-note compute** (Note 5 built; others per-note) on each bundle.
+4. **Per-note validation/confidence** (pattern built).
+5. **Assemble the full FS** from all notes, with **cross-note consistency** (each note's L1 line
+   ties to the FS face; shared figures agree across notes).
+6. **Export** the complete FS.
+
+**What already points at this:** `NoteDefinition` is the catalog the dispatcher matches against
+(each note will gain a data *signature/description*); the current single-note routing map is the
+seed of the dispatcher; the profiles-only + LLM design is how dispatch stays intelligent on
+unlabeled data. **Not built now** — POC is Note 5.
+
+---
+
 ## Target module structure (built up across phases)
 ```
 ai_accountant/
@@ -168,15 +191,24 @@ L2 summary, reconciliation with variance highlighting, confidence verdict + cont
 Both wired to real `st.download_button`s (replacing the disabled placeholders).
 **Exit criteria met:** exported values match the on-screen computed numbers (tested).
 
-## Phase 6 — Generalize to more notes + polish
+## Phase 6 — Generalize to more notes + polish  🟡 IN PROGRESS (part 1 done)
 **Goal:** Prove the pipeline generalizes beyond Note 5; productionize quality.
 **Model:** Opus (note framework), Sonnet (scaffolding, tests).
-**Tasks:**
-- Abstract a "note definition" so new notes plug into ingest→route→compute→validate→export.
-- Scaffold Notes 1, 2, 6, 8 (at least one fully working).
-- Test suite (ground-truth + unit); robust error handling; UX polish; empty/error states.
-**Exit criteria:** a second note works end-to-end via the same pipeline; tests pass.
-**Verify:** run the second note against its data; CI/test run green.
+**Part 1 — DONE:** `notes/` package — `NoteDefinition` (buckets, classification map, value column,
+FS-face labels, GL accounts) + registry + `get_note`. Cascade / reconcile / controls now read the
+active note's definition instead of hardcoding Note 5 (behavior byte-identical; 38 tests green).
+**Still to do — DEFERRED to POST-POC (POC is Note 5 only, per user 2026-06-04):**
+- **Per-note compute pipeline:** the compute logic is still investment-shaped (purchases→holdings
+  →buckets); other notes need their own steps keyed off the NoteDefinition.
+- **Note dispatcher** (see "Product end-state" above): match each uploaded table to the note(s) it
+  feeds, from profiles, across the whole note catalog — the core intelligence for the finished
+  product. Generalizes the current single-note routing map.
+- **Note-aware routing/classification** (currently Note-5 column signatures).
+- **Full-FS assembly + cross-note consistency.**
+- Scaffold each new note end-to-end — **each needs its own sample data** (like the policy docs).
+- UX polish; robust error/empty states.
+**Exit criteria (post-POC):** a second note works end-to-end via the same pipeline; tests pass.
+**POC-remaining (Note 5):** Phase 8 QA + the deferred policy/LLMWhisperer once real docs arrive.
 
 ## Phase 7 — Hardening (deferred — pre-deployment only)
 **Goal:** Production-grade safety/perf when we move off local desktop.

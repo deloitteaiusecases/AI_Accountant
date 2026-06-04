@@ -19,15 +19,11 @@ from typing import Any
 import pandas as pd
 
 from ai_accountant.ingestion.table_detect import DetectedTable
+from ai_accountant.notes.registry import DEFAULT_NOTE as _NOTE
 
-# L3 Classification value -> Note 5 headline bucket.
-_CLASS_MAP = {
-    "AC": "Amortised Cost",
-    "FVOCI": "FVOCI",
-    "FVOCI Equity": "FVOCI",
-    "FVTPL": "FVTPL",
-}
-_BUCKETS = ("FVTPL", "FVOCI", "Amortised Cost")
+# Note-specific config now lives in the active NoteDefinition (defaults to Note 5).
+_CLASS_MAP = _NOTE.classification_map     # raw classification label -> bucket
+_BUCKETS = tuple(_NOTE.buckets)           # roll-up categories (excl. TOTAL)
 
 
 @dataclass

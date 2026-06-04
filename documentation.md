@@ -81,7 +81,7 @@ sheets** (`cascade._collect_by_cols`) before aggregation — so data split anywh
 | 3 | Policy enforcement & accounting rules | ✅ Complete — classification engine (policy → IFRS 9 fallback), explainable decisions, wired through UI |
 | 4 | Validation harness & audit trail | ✅ Core complete — multi-level reconciliation + audit drill-down (editable routing map still deferred) |
 | 5 | Exports (Excel/PDF) | ✅ Complete |
-| 6 | Generalize to more notes + polish | Not started |
+| 6 | Generalize to more notes + polish | 🟡 In progress — note-definition framework done; per-note compute logic + 2nd note (needs data) pending |
 | 7 | Hardening (pre-deployment) | Deferred |
 
 ---
@@ -95,6 +95,20 @@ sheets** (`cascade._collect_by_cols`) before aggregation — so data split anywh
 ---
 
 ## Changelog
+### 2026-06-04 — Phase 6 (part 1): note-definition framework
+- New **`ai_accountant/notes/`** package: `NoteDefinition` (note_id, title, buckets,
+  classification_map, value_column, l1_label_map, gl_accounts) + `registry` (NOTE5, NOTE_REGISTRY,
+  `get_note` with default fallback). This is the seam for generalizing to 40+ notes.
+- **Engine now reads the active note's definition** instead of hardcoding Note 5:
+  `cascade._BUCKETS/_CLASS_MAP`, `reconcile._BUCKETS`/L1 label map, `controls._GL_ACCOUNTS` all
+  source from `DEFAULT_NOTE`. Note 5 behavior is **byte-identical** (all prior tests pass).
+- **Tests:** `tests/test_notes.py` — registry + fallback, NOTE5 shape, engine-reads-from-definition,
+  a new note can be defined. **38 tests across 10 files, all green.**
+- **Honest scope:** this is the *config* seam. The compute *logic* is still investment-shaped
+  (purchases→holdings→buckets); a non-investment note needs its own per-note compute steps + sample
+  data. Tracked under Phase 6 "still to do".
+- **Next:** pick the 2nd note → user provides its sample data → build per-note compute + validate.
+
 ### 2026-06-04 — Export fixes (user feedback) + richer L4-only sub-ledger
 - **Excel now includes the uploaded source tables** (incl. every L4 transaction table) as its own
   sheet, alongside the computed L1/L2/L3/Reconciliation/Confidence. Sheet names sanitized/uniqued

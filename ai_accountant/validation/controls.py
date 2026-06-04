@@ -14,6 +14,7 @@ from dataclasses import dataclass, field
 import pandas as pd
 
 from ai_accountant.compute.cascade import CascadeResult
+from ai_accountant.notes.registry import DEFAULT_NOTE as _NOTE
 
 # (amount column, id column, label) for transaction tables whose holdings MUST exist in the
 # sub-ledger. Sales/maturities are excluded from the orphan check — they reference disposed
@@ -25,8 +26,8 @@ _TXN_SOURCES = [
     ("Monthly_Amort_000", "Amort_ID", "amortisation"),
 ]
 _SALES_SOURCE = ("Proceeds_000", "Txn_ID", "sale/maturity")
-# Investment GL control accounts → bucket (for sub-ledger ↔ GL tie-out).
-_GL_ACCOUNTS = {"103000": "FVTPL", "104000": "FVOCI", "105000": "Amortised Cost"}
+# GL control accounts → bucket (for sub-ledger ↔ GL tie-out) — from the active note definition.
+_GL_ACCOUNTS = _NOTE.gl_accounts
 
 
 @dataclass
