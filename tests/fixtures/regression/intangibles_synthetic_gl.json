@@ -1,0 +1,24 @@
+{
+  "_about": "SYNTHETIC intangible-assets GL with a KNOWN roll-forward answer (NOT real data). Proves the GENERIC movement builder (Slice N1) on a SECOND single-leaf note via the telecom seed's tc_intangibles concept. Three classes: Software and Licences (cost + accumulated AMORTIZATION — the contra is amortization, not depreciation), and Goodwill (cost only — the indefinite-life exemption, the Land analog). Each schedule ties (opening + movements = closing). Total NBV 5800 == the master concept's value, so the note attaches and reconciles, captioned 'Intangible assets'. Failing cases (BLOCKED total, internal-tie break, amortization-sign-flip) are applied test-side by perturbation, like the PP&E fixture. Real-Mobily-Note-8 verification is the named pending gate.",
+  "leaves": [
+    { "gl_account": "9101", "opening": 4000, "closing": 5000, "movement_by_ref": { "ADD-PURCH": 1000 } },
+    { "gl_account": "9151", "opening": -1500, "closing": -2000, "movement_by_ref": { "AMORT-CHG": -500 } },
+    { "gl_account": "9102", "opening": 2000, "closing": 2200, "movement_by_ref": { "ADD-PURCH": 500, "DISP-COST": -300 } },
+    { "gl_account": "9152", "opening": -800, "closing": -900, "movement_by_ref": { "AMORT-CHG": -200, "DISP-AMORT": 100 } },
+    { "gl_account": "9103", "opening": 1500, "closing": 1500, "movement_by_ref": {} }
+  ],
+  "confirmed": {
+    "9101": ["Software", "cost"],
+    "9151": ["Software", "accumulated_contra"],
+    "9102": ["Licences", "cost"],
+    "9152": ["Licences", "accumulated_contra"],
+    "9103": ["Goodwill", "cost"]
+  },
+  "expected": {
+    "total_cost": 8700,
+    "total_contra": -2900,
+    "total_nbv": 5800,
+    "by_class": { "Goodwill": 1500, "Licences": 1300, "Software": 3000 }
+  },
+  "concept_value": 5800
+}

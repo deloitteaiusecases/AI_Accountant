@@ -1,0 +1,742 @@
+{
+  "description": "PROPOSED roll-up formulas for the TELECOM (Mobily) master FS. Drafted by Claude FOR Sabahat/Abhishek review — NOT yet confirmed. Transcribed from Mobily's printed FY2024 subtotal structure. The runtime AI proposers never author these (they map leaf labels only); the engine computes them deterministically. IMPORTANT: this file and the seed's kind/components both come from the same Claude proposal, so the fidelity check between them is CIRCULAR and proves only seed==rollups, NOT correctness. Correctness comes from (a) a human reviewing every formula below against Mobily's published statement, and (b) the balance check actually balancing on real data.",
+  "sign_convention": "Amounts use the TB's native sign: income positive, expenses/zakat/tax stored NEGATIVE. Subtotals therefore use '+' on an already-negative value (e.g. Gross profit = Revenue + Cost of revenue, where Cost of revenue is negative). This mirrors Mobily's published statement. If a real client TB stores expenses POSITIVE, the per-client mapping must record that and the signs flip — flag at confirm, do NOT silently assume.",
+  "rules": {
+    "kinds": "leaf=populated by mapped TB accounts; net=income-minus-expense face line; subtotal=intermediate roll-up; total=spine total (always renders).",
+    "render": "spine totals always render; net/subtotal render iff >=1 component present; empty intermediates hide.",
+    "derive_order": "topological — subtotals first, then totals that consume them; a total may reference another (Total assets = Total non-current + Total current; Total equity & liabilities = Total equity + Total liabilities).",
+    "orphan_guard": "every populated non-memo leaf must appear in some coverage total's component closure.",
+    "balance_check": "Total assets vs Total shareholders' equity and liabilities; mismatch -> non-blocking finding showing the difference, never auto-corrected."
+  },
+  "must_add_to_seed": [
+    "tc_total_assets",
+    "tc_total_equity",
+    "tc_total_liabilities",
+    "tc_total_oe",
+    "tc_net_profit",
+    "tc_total_ci"
+  ],
+  "rollups": {
+    "tc_total_nca": {
+      "kind": "subtotal",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS",
+      "canonical": "Total non-current assets",
+      "components": [
+        [
+          "+",
+          "tc_ppe"
+        ],
+        [
+          "+",
+          "tc_intangibles"
+        ],
+        [
+          "+",
+          "tc_rou"
+        ],
+        [
+          "+",
+          "tc_jv"
+        ],
+        [
+          "+",
+          "tc_contract_costs_nc"
+        ],
+        [
+          "+",
+          "tc_contract_assets_nc"
+        ],
+        [
+          "+",
+          "tc_fin_other_assets_nc"
+        ]
+      ]
+    },
+    "tc_total_ca": {
+      "kind": "subtotal",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS",
+      "canonical": "Total current assets",
+      "components": [
+        [
+          "+",
+          "tc_inventories"
+        ],
+        [
+          "+",
+          "tc_contract_costs_c"
+        ],
+        [
+          "+",
+          "tc_contract_assets_c"
+        ],
+        [
+          "+",
+          "tc_accounts_receivable"
+        ],
+        [
+          "+",
+          "tc_due_from_rp"
+        ],
+        [
+          "+",
+          "tc_fin_other_assets_c"
+        ],
+        [
+          "+",
+          "tc_murabaha"
+        ],
+        [
+          "+",
+          "tc_cash"
+        ]
+      ]
+    },
+    "tc_total_assets": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS",
+      "canonical": "Total assets",
+      "order": 999,
+      "components": [
+        [
+          "+",
+          "tc_total_nca"
+        ],
+        [
+          "+",
+          "tc_total_ca"
+        ]
+      ]
+    },
+    "tc_total_equity": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY",
+      "canonical": "Total shareholders' equity",
+      "components": [
+        [
+          "+",
+          "tc_share_cap"
+        ],
+        [
+          "+",
+          "tc_statutory"
+        ],
+        [
+          "+",
+          "tc_other_res"
+        ],
+        [
+          "+",
+          "tc_retained"
+        ]
+      ]
+    },
+    "tc_total_ncl": {
+      "kind": "subtotal",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES",
+      "canonical": "Total non-current liabilities",
+      "components": [
+        [
+          "+",
+          "tc_borrowings_nc"
+        ],
+        [
+          "+",
+          "tc_lease_liab_nc"
+        ],
+        [
+          "+",
+          "tc_eosb"
+        ],
+        [
+          "+",
+          "tc_decommissioning"
+        ],
+        [
+          "+",
+          "tc_contract_liab_nc"
+        ],
+        [
+          "+",
+          "tc_fin_other_liab_nc"
+        ]
+      ]
+    },
+    "tc_total_cl": {
+      "kind": "subtotal",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES",
+      "canonical": "Total current liabilities",
+      "components": [
+        [
+          "+",
+          "tc_borrowings_c"
+        ],
+        [
+          "+",
+          "tc_lease_liab_c"
+        ],
+        [
+          "+",
+          "tc_accounts_payable"
+        ],
+        [
+          "+",
+          "tc_contract_liab_c"
+        ],
+        [
+          "+",
+          "tc_due_to_rp"
+        ],
+        [
+          "+",
+          "tc_accrued_expenses"
+        ],
+        [
+          "+",
+          "tc_provisions"
+        ],
+        [
+          "+",
+          "tc_zakat_tax_payable"
+        ],
+        [
+          "+",
+          "tc_fin_other_liab_c"
+        ]
+      ]
+    },
+    "tc_total_liabilities": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES",
+      "canonical": "Total liabilities",
+      "order": 999,
+      "components": [
+        [
+          "+",
+          "tc_total_ncl"
+        ],
+        [
+          "+",
+          "tc_total_cl"
+        ]
+      ]
+    },
+    "tc_total_oe": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES",
+      "canonical": "Total shareholders' equity and liabilities",
+      "order": 1000,
+      "components": [
+        [
+          "+",
+          "tc_total_equity"
+        ],
+        [
+          "+",
+          "tc_total_liabilities"
+        ]
+      ]
+    },
+    "tc_gross_profit": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "REVENUE",
+      "canonical": "Gross profit",
+      "components": [
+        [
+          "+",
+          "tc_revenue"
+        ],
+        [
+          "+",
+          "tc_cor"
+        ]
+      ]
+    },
+    "tc_total_opex": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES",
+      "canonical": "Total operating expenses",
+      "components": [
+        [
+          "+",
+          "tc_sm"
+        ],
+        [
+          "+",
+          "tc_ga"
+        ],
+        [
+          "+",
+          "tc_impairment"
+        ],
+        [
+          "+",
+          "tc_dep"
+        ]
+      ]
+    },
+    "tc_operating_profit": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES",
+      "canonical": "Operating profit",
+      "components": [
+        [
+          "+",
+          "tc_gross_profit"
+        ],
+        [
+          "+",
+          "tc_total_opex"
+        ]
+      ]
+    },
+    "tc_total_other": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "OTHER_INCOME_EXPENSE",
+      "canonical": "Total other income and expenses",
+      "components": [
+        [
+          "+",
+          "tc_share_jv"
+        ],
+        [
+          "+",
+          "tc_finance_income"
+        ],
+        [
+          "+",
+          "tc_finance_costs"
+        ],
+        [
+          "+",
+          "tc_other_income"
+        ]
+      ]
+    },
+    "tc_nibz": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "RESULT",
+      "canonical": "Net profit before zakat and income tax",
+      "components": [
+        [
+          "+",
+          "tc_operating_profit"
+        ],
+        [
+          "+",
+          "tc_total_other"
+        ]
+      ]
+    },
+    "tc_net_profit": {
+      "kind": "total",
+      "statement": "income_statement",
+      "l0_section": "RESULT",
+      "canonical": "Net profit",
+      "components": [
+        [
+          "+",
+          "tc_nibz"
+        ],
+        [
+          "+",
+          "tc_zakat_tax"
+        ]
+      ]
+    },
+    "tc_total_not_reclass": {
+      "kind": "subtotal",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "canonical": "Total items that will not be reclassified subsequently to profit or loss",
+      "components": [
+        [
+          "+",
+          "tc_actuarial"
+        ],
+        [
+          "+",
+          "tc_fv_equity"
+        ]
+      ]
+    },
+    "tc_total_reclass": {
+      "kind": "subtotal",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "canonical": "Total items that will be reclassified subsequently to profit or loss",
+      "components": [
+        [
+          "+",
+          "tc_fx_translation"
+        ],
+        [
+          "+",
+          "tc_cfh_change"
+        ],
+        [
+          "+",
+          "tc_cfh_reclass"
+        ]
+      ]
+    },
+    "tc_total_oci": {
+      "kind": "subtotal",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "canonical": "Other comprehensive income / (loss)",
+      "components": [
+        [
+          "+",
+          "tc_total_not_reclass"
+        ],
+        [
+          "+",
+          "tc_total_reclass"
+        ]
+      ]
+    },
+    "tc_total_ci": {
+      "kind": "total",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "canonical": "Total comprehensive income for the period/year",
+      "components": [
+        [
+          "+",
+          "tc_np"
+        ],
+        [
+          "+",
+          "tc_total_oci"
+        ]
+      ]
+    }
+  },
+  "leaves": [
+    {
+      "concept_id": "tc_ppe",
+      "canonical": "Property and equipment",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_intangibles",
+      "canonical": "Intangible assets",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_rou",
+      "canonical": "Right of use assets",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_jv",
+      "canonical": "Investment in joint venture",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_contract_costs_nc",
+      "canonical": "Contract costs — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_contract_assets_nc",
+      "canonical": "Contract assets — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_fin_other_assets_nc",
+      "canonical": "Financial and other assets — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_inventories",
+      "canonical": "Inventories",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_contract_costs_c",
+      "canonical": "Contract costs — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_contract_assets_c",
+      "canonical": "Contract assets — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_accounts_receivable",
+      "canonical": "Accounts receivable",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_due_from_rp",
+      "canonical": "Due from related parties",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_fin_other_assets_c",
+      "canonical": "Financial and other assets — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_murabaha",
+      "canonical": "Short term Murabaha",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_cash",
+      "canonical": "Cash and cash equivalents",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_ASSETS"
+    },
+    {
+      "concept_id": "tc_share_cap",
+      "canonical": "Share capital",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "tc_statutory",
+      "canonical": "Statutory reserve",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "tc_other_res",
+      "canonical": "Other reserves",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "tc_retained",
+      "canonical": "Retained earnings",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "tc_borrowings_nc",
+      "canonical": "Borrowings — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_lease_liab_nc",
+      "canonical": "Lease liabilities — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_eosb",
+      "canonical": "Provision for employees' end of service benefits",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_decommissioning",
+      "canonical": "Provision for decommissioning",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_contract_liab_nc",
+      "canonical": "Contract liabilities — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_fin_other_liab_nc",
+      "canonical": "Financial and other liabilities — non-current",
+      "statement": "balance_sheet",
+      "l0_section": "NON_CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_borrowings_c",
+      "canonical": "Borrowings — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_lease_liab_c",
+      "canonical": "Lease liabilities — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_accounts_payable",
+      "canonical": "Accounts payable",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_contract_liab_c",
+      "canonical": "Contract liabilities — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_due_to_rp",
+      "canonical": "Due to related parties",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_accrued_expenses",
+      "canonical": "Accrued expenses",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_provisions",
+      "canonical": "Provisions",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_zakat_tax_payable",
+      "canonical": "Zakat and income tax (payable)",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_fin_other_liab_c",
+      "canonical": "Financial and other liabilities — current",
+      "statement": "balance_sheet",
+      "l0_section": "CURRENT_LIABILITIES"
+    },
+    {
+      "concept_id": "tc_revenue",
+      "canonical": "Revenue",
+      "statement": "income_statement",
+      "l0_section": "REVENUE"
+    },
+    {
+      "concept_id": "tc_cor",
+      "canonical": "Cost of revenue",
+      "statement": "income_statement",
+      "l0_section": "REVENUE"
+    },
+    {
+      "concept_id": "tc_sm",
+      "canonical": "Selling and marketing expenses",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "tc_ga",
+      "canonical": "General and administrative expenses",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "tc_impairment",
+      "canonical": "Impairment on accounts receivable and contract assets",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "tc_dep",
+      "canonical": "Depreciation and amortization",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "tc_share_jv",
+      "canonical": "Share in profit of joint venture",
+      "statement": "income_statement",
+      "l0_section": "OTHER_INCOME_EXPENSE"
+    },
+    {
+      "concept_id": "tc_finance_income",
+      "canonical": "Finance income",
+      "statement": "income_statement",
+      "l0_section": "OTHER_INCOME_EXPENSE"
+    },
+    {
+      "concept_id": "tc_finance_costs",
+      "canonical": "Finance costs",
+      "statement": "income_statement",
+      "l0_section": "OTHER_INCOME_EXPENSE"
+    },
+    {
+      "concept_id": "tc_other_income",
+      "canonical": "Other income / (expenses), net",
+      "statement": "income_statement",
+      "l0_section": "OTHER_INCOME_EXPENSE"
+    },
+    {
+      "concept_id": "tc_zakat_tax",
+      "canonical": "Zakat and income tax",
+      "statement": "income_statement",
+      "l0_section": "RESULT"
+    },
+    {
+      "concept_id": "tc_eps",
+      "canonical": "Basic and diluted earnings per share",
+      "statement": "income_statement",
+      "l0_section": "RESULT"
+    },
+    {
+      "concept_id": "tc_np",
+      "canonical": "Net profit",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "tc_actuarial",
+      "canonical": "Actuarial remeasurement of employees' end of service benefits",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "tc_fv_equity",
+      "canonical": "Change in fair value of equity investments",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "tc_fx_translation",
+      "canonical": "Exchange differences on translation of foreign operations",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "tc_cfh_change",
+      "canonical": "Cash flow hedge - change in fair value",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "tc_cfh_reclass",
+      "canonical": "Cash flow hedge - reclassified to profit or loss",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    }
+  ]
+}

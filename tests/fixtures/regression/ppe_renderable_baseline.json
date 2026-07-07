@@ -1,0 +1,95 @@
+{
+  "caveats": [
+    "MAGNITUDE UNVERIFIED — internally consistent; magnitude unverified — no anchoring TB line"
+  ],
+  "note_ref": "Property, plant and equipment",
+  "reasons": [
+    "MAGNITUDE UNVERIFIED (R16): internally consistent; magnitude unverified — no anchoring TB line"
+  ],
+  "rows": [
+    {
+      "flag": "",
+      "indent": 0,
+      "kind": "section",
+      "label": "Buildings",
+      "raw_sar": 3400.0,
+      "value": 3400.0
+    },
+    {
+      "flag": "",
+      "indent": 1,
+      "kind": "line",
+      "label": "  Cost",
+      "raw_sar": 5500.0,
+      "value": 5500.0
+    },
+    {
+      "flag": "",
+      "indent": 1,
+      "kind": "line",
+      "label": "  Accumulated depreciation",
+      "raw_sar": -2100.0,
+      "value": -2100.0
+    },
+    {
+      "flag": "",
+      "indent": 0,
+      "kind": "section",
+      "label": "Land",
+      "raw_sar": 1200.0,
+      "value": 1200.0
+    },
+    {
+      "flag": "",
+      "indent": 1,
+      "kind": "line",
+      "label": "  Cost",
+      "raw_sar": 1200.0,
+      "value": 1200.0
+    },
+    {
+      "flag": "",
+      "indent": 1,
+      "kind": "line",
+      "label": "  Accumulated depreciation",
+      "raw_sar": 0.0,
+      "value": 0.0
+    },
+    {
+      "flag": "",
+      "indent": 0,
+      "kind": "section",
+      "label": "Plant and Machinery",
+      "raw_sar": 2050.0,
+      "value": 2050.0
+    },
+    {
+      "flag": "",
+      "indent": 1,
+      "kind": "line",
+      "label": "  Cost",
+      "raw_sar": 3500.0,
+      "value": 3500.0
+    },
+    {
+      "flag": "",
+      "indent": 1,
+      "kind": "line",
+      "label": "  Accumulated depreciation",
+      "raw_sar": -1450.0,
+      "value": -1450.0
+    },
+    {
+      "flag": "magnitude",
+      "indent": 0,
+      "kind": "total",
+      "label": "Total — net book value",
+      "raw_sar": 6650.0,
+      "value": 6650.0
+    }
+  ],
+  "status": "PARTIAL",
+  "status_line": "PARTIAL — PP&E, net book value 6,650.00 SAR",
+  "unit_confirmed": true,
+  "unit_label": "SAR"
+}

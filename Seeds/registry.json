@@ -1,0 +1,17 @@
+{
+  "detect_thresholds": { "floor": 0.15, "margin": 0.10, "high_bar": 0.30 },
+  "masters": [
+    {
+      "id": "ksa_bank",
+      "label": "KSA Bank (Bank AlJazira ∪ Saudi Awwal Bank)",
+      "seed_path": "seeds/master_fs_structure_seed.json",
+      "rollups_path": "Formulas/master_fs_rollups_authored.json"
+    },
+    {
+      "id": "telecom_mobily",
+      "label": "Telecom — Etihad Etisalat (Mobily), illustrative",
+      "seed_path": "seeds/master_fs_telecom_seed.json",
+      "rollups_path": "Formulas/master_fs_telecom_rollups.json"
+    }
+  ]
+}

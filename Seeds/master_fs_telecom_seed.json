@@ -1,0 +1,1462 @@
+{
+  "schema_version": "1.0",
+  "description": "Master FS structure seed — CORPORATE (telecom) archetype — STRUCTURE ONLY, no amounts ever. AI-PROPOSED / UNCONFIRMED. tc_* namespace. Seeded from Etihad Etisalat Company (Mobily) FY2024 published FS. Current/non-current presentation. Authored to the Slice-A engine-block contract.",
+  "provenance_seed": "ai_proposed_unconfirmed",
+  "seed_corporates": [
+    "mobily"
+  ],
+  "extensible": true,
+  "extension_method": "propose_confirm_store",
+  "notes": [
+    "One canonical concept per line; client's own label preserved for display via label_aliases.",
+    "A client FS renders ONLY the concepts its TB populates; unused concepts are omitted.",
+    "A new corporate maps its lines into these concepts BY SIGNAL; a line matching no concept is PROPOSED as a new concept, confirmed by a human, appended.",
+    "NEVER stores amounts. Amounts live with each client's TB, not here.",
+    "AI-PROPOSED / UNCONFIRMED: generated from Mobily's published FS, NOT human-approved. Before use this requires (a) human review + an approved xlsx spec, (b) a human-authored master_fs_rollups_authored_corporate.json, (c) GATE 0 (JSON<->xlsx) + rollup fidelity to pass.",
+    "Current/non-current split is carried in l0_section. Lines that exist in BOTH maturities (borrowings, lease liabilities, contract assets/costs/liabilities, financial & other assets/liabilities) are DISTINCT concepts split by maturity, not duplicates.",
+    "SIGN CONVENTION (proposed): expenses/zakat/tax stored NEGATIVE, mirroring the published statement, so subtotals use '+' on already-negative values. This assumes the published-FS convention; the REAL client TB sign convention is UNCONFIRMED and must be recorded per-client at confirm time. If a real TB stores them positive, the component signs flip.",
+    "pl_eps is a non-summing memo leaf (whitelisted by the orphan-leaf guard, same as the bank master).",
+    "tc_* namespace — distinct from the bank seed's bs_/pl_/oci_ ids (no cross-seed collision).",
+    "engine block authored to the Slice-A loader contract; validates against validate_engine_meta.",
+    "Still UNCONFIRMED: requires human review + GATE 0 (JSON<->xlsx) + a human-authored telecom rollups file before it may enter the registry."
+  ],
+  "engine": {
+    "master_id": "telecom_mobily",
+    "presentation": "current_non_current",
+    "current_non_current_split": true,
+    "statements": [
+      {
+        "key": "balance_sheet",
+        "title": "Statement of Financial Position",
+        "sections": [
+          "NON_CURRENT_ASSETS",
+          "CURRENT_ASSETS",
+          "EQUITY",
+          "NON_CURRENT_LIABILITIES",
+          "CURRENT_LIABILITIES"
+        ],
+        "coverage_totals": [
+          "tc_total_assets",
+          "tc_total_liabilities",
+          "tc_total_equity"
+        ]
+      },
+      {
+        "key": "income_statement",
+        "title": "Statement of Profit or Loss",
+        "sections": [
+          "REVENUE",
+          "OPERATING_EXPENSES",
+          "OTHER_INCOME_EXPENSE",
+          "RESULT"
+        ],
+        "coverage_totals": [
+          "tc_net_profit"
+        ]
+      },
+      {
+        "key": "comprehensive_income",
+        "title": "Statement of Comprehensive Income",
+        "sections": [
+          "COMPREHENSIVE_INCOME"
+        ],
+        "coverage_totals": [
+          "tc_total_ci"
+        ]
+      }
+    ],
+    "balance_check": {
+      "statement": "balance_sheet",
+      "assets_total": "tc_total_assets",
+      "liab_equity_total": "tc_total_oe",
+      "label": "Statement of financial position",
+      "short": "SOFP"
+    },
+    "memo_leaves": [
+      "tc_eps"
+    ],
+    "default_placement": {
+      "statement": "balance_sheet",
+      "section": "NON_CURRENT_ASSETS"
+    },
+    "prompts": {
+      "domain": "SAUDI CORPORATES (telecom)",
+      "master_desc": "an illustrative Saudi telecom operator's face lines (seeded from Etihad Etisalat / Mobily FY2024), current/non-current presentation, IFRS as endorsed in KSA",
+      "entity_noun": "company",
+      "mapping_hints": "CORPORATE/TELECOM VOCABULARY: 'Revenue' less 'Cost of revenue' gives 'Gross profit'; 'Right of use assets' and 'Lease liabilities' arise under IFRS 16 and are split current/non-current; 'Contract assets', 'Contract costs' and 'Contract liabilities' are IFRS 15 lines, each split current/non-current; 'Short term Murabaha' is a current investment of surplus cash; 'Zakat and income tax' is a single combined line (payable on the SOFP, charge on the P&L); 'Provision for employees' end of service benefits' is a non-current obligation; 'Due from / Due to related parties' are distinct from trade receivables/payables; the SAME nature (borrowings, lease liabilities, contract assets/costs/liabilities, financial & other assets/liabilities) appears TWICE, split by maturity into current and non-current — these are DISTINCT concepts, not duplicates.",
+      "extension_examples": "'Contract assets', 'Right of use assets', 'Provision for decommissioning', 'Spectrum licences'"
+    },
+    "carry_leaves": [
+      {
+        "id": "tc_np",
+        "from": "tc_net_profit"
+      }
+    ],
+    "result_close": {
+      "retained_concept": "tc_retained",
+      "result_total": "tc_total_ci"
+    },
+    "notes": [
+      {
+        "concept": "tc_ppe",
+        "mechanism": "roll_forward",
+        "anchor": "tc_ppe",
+        "builder": "ppe",
+        "cost_config": "ppe_cost",
+        "contra_config": "ppe_dep"
+      },
+      {
+        "concept": "tc_intangibles",
+        "mechanism": "roll_forward",
+        "anchor": "tc_intangibles",
+        "caption": "Intangible assets",
+        "exempt_classes": ["goodwill"],
+        "cost_config": "intangible_cost",
+        "contra_config": "intangible_amort"
+      },
+      {
+        "concept": "tc_rou",
+        "mechanism": "roll_forward",
+        "anchor": "tc_rou",
+        "caption": "Right-of-use assets"
+      },
+      {
+        "concept": "tc_ppe",
+        "mechanism": "static_breakdown",
+        "caption": "Property and equipment"
+      },
+      {
+        "concept": "tc_intangibles",
+        "mechanism": "static_breakdown",
+        "caption": "Intangible assets"
+      },
+      {
+        "concept": "tc_rou",
+        "mechanism": "static_breakdown",
+        "caption": "Right-of-use assets"
+      },
+      {
+        "note": "lease_liabilities",
+        "mechanism": "roll_forward",
+        "splits": [
+          {
+            "concept": "tc_lease_liab_nc",
+            "maturity": "non_current"
+          },
+          {
+            "concept": "tc_lease_liab_c",
+            "maturity": "current"
+          }
+        ]
+      },
+      {
+        "concept": "tc_fin_other_assets_nc",
+        "mechanism": "static_breakdown",
+        "caption": "Financial and other assets — non-current",
+        "component_hints": ["Financial assets", "Other assets"]
+      },
+      {
+        "concept": "tc_fin_other_assets_c",
+        "mechanism": "static_breakdown",
+        "caption": "Financial and other assets — current",
+        "component_hints": ["Financial assets", "Other assets"]
+      },
+      {
+        "concept": "tc_cash",
+        "mechanism": "static_breakdown",
+        "caption": "Cash and cash equivalents"
+      },
+      {
+        "concept": "tc_contract_costs_nc",
+        "mechanism": "static_breakdown",
+        "caption": "Contract costs"
+      },
+      {
+        "concept": "tc_due_from_rp",
+        "mechanism": "static_breakdown",
+        "caption": "Due from related parties"
+      },
+      {
+        "concept": "tc_accounts_receivable",
+        "mechanism": "static_breakdown",
+        "caption": "Accounts receivable (net of allowance)"
+      },
+      {
+        "concept": "tc_inventories",
+        "mechanism": "static_breakdown",
+        "caption": "Inventories (net of provision)"
+      },
+      {
+        "concept": "tc_contract_assets_nc",
+        "mechanism": "static_breakdown",
+        "caption": "Contract assets (net of allowance)"
+      }
+    ]
+  },
+  "statements": {
+    "balance_sheet": [
+      {
+        "concept_id": "tc_ppe",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Property and equipment",
+        "label_aliases": {
+          "mobily": "Property and equipment"
+        },
+        "presence": "mobily",
+        "order": 10,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_intangibles",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Intangible assets",
+        "label_aliases": {
+          "mobily": "Intangible assets"
+        },
+        "presence": "mobily",
+        "order": 20,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_rou",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Right of use assets",
+        "label_aliases": {
+          "mobily": "Right of use assets"
+        },
+        "presence": "mobily",
+        "order": 30,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_jv",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Investment in joint venture",
+        "label_aliases": {
+          "mobily": "Investment in joint venture"
+        },
+        "presence": "mobily",
+        "order": 40,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_contract_costs_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Contract costs — non-current",
+        "label_aliases": {
+          "mobily": "Contract costs"
+        },
+        "presence": "mobily",
+        "order": 50,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_contract_assets_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Contract assets — non-current",
+        "label_aliases": {
+          "mobily": "Contract assets"
+        },
+        "presence": "mobily",
+        "order": 60,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_fin_other_assets_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Financial and other assets — non-current",
+        "label_aliases": {
+          "mobily": "Financial and other assets"
+        },
+        "presence": "mobily",
+        "order": 70,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_nca",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Total non-current assets",
+        "label_aliases": {
+          "mobily": "Total non-current assets"
+        },
+        "presence": "mobily",
+        "order": 100,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_ppe"
+          ],
+          [
+            "+",
+            "tc_intangibles"
+          ],
+          [
+            "+",
+            "tc_rou"
+          ],
+          [
+            "+",
+            "tc_jv"
+          ],
+          [
+            "+",
+            "tc_contract_costs_nc"
+          ],
+          [
+            "+",
+            "tc_contract_assets_nc"
+          ],
+          [
+            "+",
+            "tc_fin_other_assets_nc"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_inventories",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Inventories",
+        "label_aliases": {
+          "mobily": "Inventories"
+        },
+        "presence": "mobily",
+        "order": 110,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_contract_costs_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Contract costs — current",
+        "label_aliases": {
+          "mobily": "Contract costs"
+        },
+        "presence": "mobily",
+        "order": 120,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_contract_assets_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Contract assets — current",
+        "label_aliases": {
+          "mobily": "Contract assets"
+        },
+        "presence": "mobily",
+        "order": 130,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_accounts_receivable",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Accounts receivable",
+        "label_aliases": {
+          "mobily": "Accounts receivable"
+        },
+        "presence": "mobily",
+        "order": 140,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_due_from_rp",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Due from related parties",
+        "label_aliases": {
+          "mobily": "Due from related parties"
+        },
+        "presence": "mobily",
+        "order": 150,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_fin_other_assets_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Financial and other assets — current",
+        "label_aliases": {
+          "mobily": "Financial and other assets"
+        },
+        "presence": "mobily",
+        "order": 160,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_murabaha",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Short term Murabaha",
+        "label_aliases": {
+          "mobily": "Short term Murabaha"
+        },
+        "presence": "mobily",
+        "order": 170,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_cash",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Cash and cash equivalents",
+        "label_aliases": {
+          "mobily": "Cash and cash equivalents"
+        },
+        "presence": "mobily",
+        "order": 180,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_ca",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Total current assets",
+        "label_aliases": {
+          "mobily": "Total current assets"
+        },
+        "presence": "mobily",
+        "order": 200,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_inventories"
+          ],
+          [
+            "+",
+            "tc_contract_costs_c"
+          ],
+          [
+            "+",
+            "tc_contract_assets_c"
+          ],
+          [
+            "+",
+            "tc_accounts_receivable"
+          ],
+          [
+            "+",
+            "tc_due_from_rp"
+          ],
+          [
+            "+",
+            "tc_fin_other_assets_c"
+          ],
+          [
+            "+",
+            "tc_murabaha"
+          ],
+          [
+            "+",
+            "tc_cash"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_total_assets",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_ASSETS",
+        "l1_group": null,
+        "canonical_concept": "Total assets",
+        "label_aliases": {
+          "mobily": "Total assets"
+        },
+        "presence": "mobily",
+        "order": 999,
+        "kind": "total",
+        "components": [
+          [
+            "+",
+            "tc_total_nca"
+          ],
+          [
+            "+",
+            "tc_total_ca"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_share_cap",
+        "statement": "balance_sheet",
+        "l0_section": "EQUITY",
+        "l1_group": null,
+        "canonical_concept": "Share capital",
+        "label_aliases": {
+          "mobily": "Share capital"
+        },
+        "presence": "mobily",
+        "order": 210,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_statutory",
+        "statement": "balance_sheet",
+        "l0_section": "EQUITY",
+        "l1_group": null,
+        "canonical_concept": "Statutory reserve",
+        "label_aliases": {
+          "mobily": "Statutory reserve"
+        },
+        "presence": "mobily",
+        "order": 220,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_other_res",
+        "statement": "balance_sheet",
+        "l0_section": "EQUITY",
+        "l1_group": null,
+        "canonical_concept": "Other reserves",
+        "label_aliases": {
+          "mobily": "Other reserves"
+        },
+        "presence": "mobily",
+        "order": 230,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_retained",
+        "statement": "balance_sheet",
+        "l0_section": "EQUITY",
+        "l1_group": null,
+        "canonical_concept": "Retained earnings",
+        "label_aliases": {
+          "mobily": "Retained earnings"
+        },
+        "presence": "mobily",
+        "order": 240,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_equity",
+        "statement": "balance_sheet",
+        "l0_section": "EQUITY",
+        "l1_group": null,
+        "canonical_concept": "Total shareholders' equity",
+        "label_aliases": {
+          "mobily": "Total shareholders' equity"
+        },
+        "presence": "mobily",
+        "order": 300,
+        "kind": "total",
+        "components": [
+          [
+            "+",
+            "tc_share_cap"
+          ],
+          [
+            "+",
+            "tc_statutory"
+          ],
+          [
+            "+",
+            "tc_other_res"
+          ],
+          [
+            "+",
+            "tc_retained"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_borrowings_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Borrowings — non-current",
+        "label_aliases": {
+          "mobily": "Borrowings"
+        },
+        "presence": "mobily",
+        "order": 310,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_lease_liab_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Lease liabilities — non-current",
+        "label_aliases": {
+          "mobily": "Lease liabilities"
+        },
+        "presence": "mobily",
+        "order": 320,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_eosb",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Provision for employees' end of service benefits",
+        "label_aliases": {
+          "mobily": "Provision for employees' end of service benefits"
+        },
+        "presence": "mobily",
+        "order": 330,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_decommissioning",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Provision for decommissioning",
+        "label_aliases": {
+          "mobily": "Provision for Decommissioning"
+        },
+        "presence": "mobily",
+        "order": 340,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_contract_liab_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Contract liabilities — non-current",
+        "label_aliases": {
+          "mobily": "Contract liabilities"
+        },
+        "presence": "mobily",
+        "order": 350,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_fin_other_liab_nc",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Financial and other liabilities — non-current",
+        "label_aliases": {
+          "mobily": "Financial and other liabilities"
+        },
+        "presence": "mobily",
+        "order": 360,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_ncl",
+        "statement": "balance_sheet",
+        "l0_section": "NON_CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Total non-current liabilities",
+        "label_aliases": {
+          "mobily": "Total non-current liabilities"
+        },
+        "presence": "mobily",
+        "order": 400,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_borrowings_nc"
+          ],
+          [
+            "+",
+            "tc_lease_liab_nc"
+          ],
+          [
+            "+",
+            "tc_eosb"
+          ],
+          [
+            "+",
+            "tc_decommissioning"
+          ],
+          [
+            "+",
+            "tc_contract_liab_nc"
+          ],
+          [
+            "+",
+            "tc_fin_other_liab_nc"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_borrowings_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Borrowings — current",
+        "label_aliases": {
+          "mobily": "Borrowings"
+        },
+        "presence": "mobily",
+        "order": 410,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_lease_liab_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Lease liabilities — current",
+        "label_aliases": {
+          "mobily": "Lease liabilities"
+        },
+        "presence": "mobily",
+        "order": 420,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_accounts_payable",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Accounts payable",
+        "label_aliases": {
+          "mobily": "Accounts payable"
+        },
+        "presence": "mobily",
+        "order": 430,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_contract_liab_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Contract liabilities — current",
+        "label_aliases": {
+          "mobily": "Contract liabilities"
+        },
+        "presence": "mobily",
+        "order": 440,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_due_to_rp",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Due to related parties",
+        "label_aliases": {
+          "mobily": "Due to related parties"
+        },
+        "presence": "mobily",
+        "order": 450,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_accrued_expenses",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Accrued expenses",
+        "label_aliases": {
+          "mobily": "Accrued expenses"
+        },
+        "presence": "mobily",
+        "order": 460,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_provisions",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Provisions",
+        "label_aliases": {
+          "mobily": "Provisions"
+        },
+        "presence": "mobily",
+        "order": 470,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_zakat_tax_payable",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Zakat and income tax (payable)",
+        "label_aliases": {
+          "mobily": "Zakat and income tax"
+        },
+        "presence": "mobily",
+        "order": 480,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_fin_other_liab_c",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Financial and other liabilities — current",
+        "label_aliases": {
+          "mobily": "Financial and other liabilities"
+        },
+        "presence": "mobily",
+        "order": 490,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_cl",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Total current liabilities",
+        "label_aliases": {
+          "mobily": "Total current liabilities"
+        },
+        "presence": "mobily",
+        "order": 500,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_borrowings_c"
+          ],
+          [
+            "+",
+            "tc_lease_liab_c"
+          ],
+          [
+            "+",
+            "tc_accounts_payable"
+          ],
+          [
+            "+",
+            "tc_contract_liab_c"
+          ],
+          [
+            "+",
+            "tc_due_to_rp"
+          ],
+          [
+            "+",
+            "tc_accrued_expenses"
+          ],
+          [
+            "+",
+            "tc_provisions"
+          ],
+          [
+            "+",
+            "tc_zakat_tax_payable"
+          ],
+          [
+            "+",
+            "tc_fin_other_liab_c"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_total_liabilities",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Total liabilities",
+        "label_aliases": {
+          "mobily": "Total liabilities"
+        },
+        "presence": "mobily",
+        "order": 999,
+        "kind": "total",
+        "components": [
+          [
+            "+",
+            "tc_total_ncl"
+          ],
+          [
+            "+",
+            "tc_total_cl"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_total_oe",
+        "statement": "balance_sheet",
+        "l0_section": "CURRENT_LIABILITIES",
+        "l1_group": null,
+        "canonical_concept": "Total shareholders' equity and liabilities",
+        "label_aliases": {
+          "mobily": "Total shareholders' equity and liabilities"
+        },
+        "presence": "mobily",
+        "order": 1000,
+        "kind": "total",
+        "components": [
+          [
+            "+",
+            "tc_total_equity"
+          ],
+          [
+            "+",
+            "tc_total_liabilities"
+          ]
+        ]
+      }
+    ],
+    "income_statement": [
+      {
+        "concept_id": "tc_revenue",
+        "statement": "income_statement",
+        "l0_section": "REVENUE",
+        "l1_group": null,
+        "canonical_concept": "Revenue",
+        "label_aliases": {
+          "mobily": "Revenue"
+        },
+        "presence": "mobily",
+        "order": 10,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_cor",
+        "statement": "income_statement",
+        "l0_section": "REVENUE",
+        "l1_group": null,
+        "canonical_concept": "Cost of revenue",
+        "label_aliases": {
+          "mobily": "Cost of revenue"
+        },
+        "presence": "mobily",
+        "order": 20,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_gross_profit",
+        "statement": "income_statement",
+        "l0_section": "REVENUE",
+        "l1_group": null,
+        "canonical_concept": "Gross profit",
+        "label_aliases": {
+          "mobily": "Gross profit"
+        },
+        "presence": "mobily",
+        "order": 30,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_revenue"
+          ],
+          [
+            "+",
+            "tc_cor"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_sm",
+        "statement": "income_statement",
+        "l0_section": "OPERATING_EXPENSES",
+        "l1_group": null,
+        "canonical_concept": "Selling and marketing expenses",
+        "label_aliases": {
+          "mobily": "Selling and marketing expenses"
+        },
+        "presence": "mobily",
+        "order": 40,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_ga",
+        "statement": "income_statement",
+        "l0_section": "OPERATING_EXPENSES",
+        "l1_group": null,
+        "canonical_concept": "General and administrative expenses",
+        "label_aliases": {
+          "mobily": "General and administrative expenses"
+        },
+        "presence": "mobily",
+        "order": 50,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_impairment",
+        "statement": "income_statement",
+        "l0_section": "OPERATING_EXPENSES",
+        "l1_group": null,
+        "canonical_concept": "Impairment on accounts receivable and contract assets",
+        "label_aliases": {
+          "mobily": "Impairment on accounts receivable and contract assets"
+        },
+        "presence": "mobily",
+        "order": 60,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_dep",
+        "statement": "income_statement",
+        "l0_section": "OPERATING_EXPENSES",
+        "l1_group": null,
+        "canonical_concept": "Depreciation and amortization",
+        "label_aliases": {
+          "mobily": "Depreciation and amortization"
+        },
+        "presence": "mobily",
+        "order": 70,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_opex",
+        "statement": "income_statement",
+        "l0_section": "OPERATING_EXPENSES",
+        "l1_group": null,
+        "canonical_concept": "Total operating expenses",
+        "label_aliases": {
+          "mobily": "Total operating expenses"
+        },
+        "presence": "mobily",
+        "order": 80,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_sm"
+          ],
+          [
+            "+",
+            "tc_ga"
+          ],
+          [
+            "+",
+            "tc_impairment"
+          ],
+          [
+            "+",
+            "tc_dep"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_operating_profit",
+        "statement": "income_statement",
+        "l0_section": "OPERATING_EXPENSES",
+        "l1_group": null,
+        "canonical_concept": "Operating profit",
+        "label_aliases": {
+          "mobily": "Operating profit"
+        },
+        "presence": "mobily",
+        "order": 90,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_gross_profit"
+          ],
+          [
+            "+",
+            "tc_total_opex"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_share_jv",
+        "statement": "income_statement",
+        "l0_section": "OTHER_INCOME_EXPENSE",
+        "l1_group": null,
+        "canonical_concept": "Share in profit of joint venture",
+        "label_aliases": {
+          "mobily": "Share in profit of joint venture"
+        },
+        "presence": "mobily",
+        "order": 100,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_finance_income",
+        "statement": "income_statement",
+        "l0_section": "OTHER_INCOME_EXPENSE",
+        "l1_group": null,
+        "canonical_concept": "Finance income",
+        "label_aliases": {
+          "mobily": "Finance income"
+        },
+        "presence": "mobily",
+        "order": 110,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_finance_costs",
+        "statement": "income_statement",
+        "l0_section": "OTHER_INCOME_EXPENSE",
+        "l1_group": null,
+        "canonical_concept": "Finance costs",
+        "label_aliases": {
+          "mobily": "Finance costs"
+        },
+        "presence": "mobily",
+        "order": 120,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_other_income",
+        "statement": "income_statement",
+        "l0_section": "OTHER_INCOME_EXPENSE",
+        "l1_group": null,
+        "canonical_concept": "Other income / (expenses), net",
+        "label_aliases": {
+          "mobily": "Other income / (expenses), net"
+        },
+        "presence": "mobily",
+        "order": 130,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_other",
+        "statement": "income_statement",
+        "l0_section": "OTHER_INCOME_EXPENSE",
+        "l1_group": null,
+        "canonical_concept": "Total other income and expenses",
+        "label_aliases": {
+          "mobily": "Total other income and expenses"
+        },
+        "presence": "mobily",
+        "order": 140,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_share_jv"
+          ],
+          [
+            "+",
+            "tc_finance_income"
+          ],
+          [
+            "+",
+            "tc_finance_costs"
+          ],
+          [
+            "+",
+            "tc_other_income"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_nibz",
+        "statement": "income_statement",
+        "l0_section": "RESULT",
+        "l1_group": null,
+        "canonical_concept": "Net profit before zakat and income tax",
+        "label_aliases": {
+          "mobily": "Net profit before zakat and income tax"
+        },
+        "presence": "mobily",
+        "order": 150,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_operating_profit"
+          ],
+          [
+            "+",
+            "tc_total_other"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_zakat_tax",
+        "statement": "income_statement",
+        "l0_section": "RESULT",
+        "l1_group": null,
+        "canonical_concept": "Zakat and income tax",
+        "label_aliases": {
+          "mobily": "Zakat and income tax"
+        },
+        "presence": "mobily",
+        "order": 160,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_net_profit",
+        "statement": "income_statement",
+        "l0_section": "RESULT",
+        "l1_group": null,
+        "canonical_concept": "Net profit",
+        "label_aliases": {
+          "mobily": "Net profit"
+        },
+        "presence": "mobily",
+        "order": 170,
+        "kind": "total",
+        "components": [
+          [
+            "+",
+            "tc_nibz"
+          ],
+          [
+            "+",
+            "tc_zakat_tax"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_eps",
+        "statement": "income_statement",
+        "l0_section": "RESULT",
+        "l1_group": null,
+        "canonical_concept": "Basic and diluted earnings per share",
+        "label_aliases": {
+          "mobily": "Basic and diluted earnings per share (in SR)"
+        },
+        "presence": "mobily",
+        "order": 180,
+        "kind": "leaf",
+        "components": []
+      }
+    ],
+    "comprehensive_income": [
+      {
+        "concept_id": "tc_np",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": null,
+        "canonical_concept": "Net profit",
+        "label_aliases": {
+          "mobily": "Net profit"
+        },
+        "presence": "mobily",
+        "order": 10,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_actuarial",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will not be reclassified subsequently to profit or loss",
+        "canonical_concept": "Actuarial remeasurement of employees' end of service benefits",
+        "label_aliases": {
+          "mobily": "Actuarial remeasurement of employees' end of service benefits"
+        },
+        "presence": "mobily",
+        "order": 20,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_fv_equity",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will not be reclassified subsequently to profit or loss",
+        "canonical_concept": "Change in fair value of equity investments",
+        "label_aliases": {
+          "mobily": "Change in fair value of equity investments"
+        },
+        "presence": "mobily",
+        "order": 30,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_not_reclass",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will not be reclassified subsequently to profit or loss",
+        "canonical_concept": "Total items that will not be reclassified subsequently to profit or loss",
+        "label_aliases": {
+          "mobily": "Total items that will not be reclassified subsequently to profit or loss"
+        },
+        "presence": "mobily",
+        "order": 40,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_actuarial"
+          ],
+          [
+            "+",
+            "tc_fv_equity"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_fx_translation",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will be reclassified subsequently to profit or loss",
+        "canonical_concept": "Exchange differences on translation of foreign operations",
+        "label_aliases": {
+          "mobily": "Exchange differences on translation of foreign operations"
+        },
+        "presence": "mobily",
+        "order": 50,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_cfh_change",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will be reclassified subsequently to profit or loss",
+        "canonical_concept": "Cash flow hedge - change in fair value",
+        "label_aliases": {
+          "mobily": "Cash flow hedge - change in fair value"
+        },
+        "presence": "mobily",
+        "order": 60,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_cfh_reclass",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will be reclassified subsequently to profit or loss",
+        "canonical_concept": "Cash flow hedge - reclassified to profit or loss",
+        "label_aliases": {
+          "mobily": "Cash flow hedge - reclassified to profit or loss"
+        },
+        "presence": "mobily",
+        "order": 70,
+        "kind": "leaf",
+        "components": []
+      },
+      {
+        "concept_id": "tc_total_reclass",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": "Items that will be reclassified subsequently to profit or loss",
+        "canonical_concept": "Total items that will be reclassified subsequently to profit or loss",
+        "label_aliases": {
+          "mobily": "Total items that will be reclassified subsequently to profit or loss"
+        },
+        "presence": "mobily",
+        "order": 80,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_fx_translation"
+          ],
+          [
+            "+",
+            "tc_cfh_change"
+          ],
+          [
+            "+",
+            "tc_cfh_reclass"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_total_oci",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": null,
+        "canonical_concept": "Other comprehensive income / (loss)",
+        "label_aliases": {
+          "mobily": "Other comprehensive loss"
+        },
+        "presence": "mobily",
+        "order": 90,
+        "kind": "subtotal",
+        "components": [
+          [
+            "+",
+            "tc_total_not_reclass"
+          ],
+          [
+            "+",
+            "tc_total_reclass"
+          ]
+        ]
+      },
+      {
+        "concept_id": "tc_total_ci",
+        "statement": "comprehensive_income",
+        "l0_section": "COMPREHENSIVE_INCOME",
+        "l1_group": null,
+        "canonical_concept": "Total comprehensive income for the period/year",
+        "label_aliases": {
+          "mobily": "Total comprehensive income"
+        },
+        "presence": "mobily",
+        "order": 100,
+        "kind": "total",
+        "components": [
+          [
+            "+",
+            "tc_np"
+          ],
+          [
+            "+",
+            "tc_total_oci"
+          ]
+        ]
+      }
+    ]
+  }
+}

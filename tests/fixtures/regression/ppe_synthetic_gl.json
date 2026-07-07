@@ -1,0 +1,24 @@
+{
+  "_about": "SYNTHETIC PP&E GL with a KNOWN roll-forward answer (NOT real data). Three classes: Land (cost only — the no-depreciation exemption), Buildings and Plant (cost + accumulated depreciation). Each schedule ties (opening + movements = closing). Total NBV 6650 == the master concept's value, so the master-FS note attaches and reconciles. Used to prove the note-attachment seam: reconcile-to-concept-or-BLOCK + the explicit sign assertion. Real-Mobily-Note-7 verification is the named pending gate.",
+  "leaves": [
+    { "gl_account": "8101", "opening": 1000, "closing": 1200, "movement_by_ref": { "ADD-PURCH": 200 } },
+    { "gl_account": "8102", "opening": 5000, "closing": 5500, "movement_by_ref": { "ADD-PURCH": 1000, "DISP-COST": -500 } },
+    { "gl_account": "8152", "opening": -2000, "closing": -2100, "movement_by_ref": { "DEP-CHG": -300, "DISP-DEP": 200 } },
+    { "gl_account": "8103", "opening": 3000, "closing": 3500, "movement_by_ref": { "ADD-PURCH": 500 } },
+    { "gl_account": "8153", "opening": -1200, "closing": -1450, "movement_by_ref": { "DEP-CHG": -250 } }
+  ],
+  "confirmed": {
+    "8101": ["Land", "cost"],
+    "8102": ["Buildings", "cost"],
+    "8152": ["Buildings", "accumulated_contra"],
+    "8103": ["Plant and Machinery", "cost"],
+    "8153": ["Plant and Machinery", "accumulated_contra"]
+  },
+  "expected": {
+    "total_cost": 10200,
+    "total_accum_dep": -3550,
+    "total_nbv": 6650,
+    "by_class": { "Land": 1200, "Buildings": 3400, "Plant and Machinery": 2050 }
+  },
+  "concept_value": 6650
+}

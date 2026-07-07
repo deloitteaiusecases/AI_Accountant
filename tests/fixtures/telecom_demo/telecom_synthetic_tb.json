@@ -1,0 +1,42 @@
+{
+  "_about": "SYNTHETIC telecom trial balance (NOT real data, NOT Mobily's published TB — invented figures). Built from the telecom_mobily face structure (tc_* concepts) with plausible, internally consistent amounts in SAR'000. The SOFP BALANCES (total assets 93,000 == total equity 53,000 + total liabilities 40,000) and the P&L is coherent (net profit 5,000 carries into OCI via the tc_np carry-leaf; total comprehensive income 5,150). Proves the telecom pipeline runs and the lease maturity-split note is exercised; it is NOT verification against any published statement. Sign convention: expense / zakat-tax leaves carry NEGATIVE values. The carry-leaf tc_np is NOT in the TB (the engine carries it from tc_net_profit). The current lease-liability half (tc_lease_liab_c) is deliberately NOT carried as an independent TB leaf, so the lease split is Case B (management judgment, no independent TB backstop) — the G5 confirm gate and the persistent judgment marker.",
+  "unit": "SAR'000",
+  "client": "synthetic-telecom-demo",
+  "rows": [
+    {"account": "tc_ppe", "concept_id": "tc_ppe", "current": 50000},
+    {"account": "tc_intangibles", "concept_id": "tc_intangibles", "current": 8000},
+    {"account": "tc_rou", "concept_id": "tc_rou", "current": 6000},
+    {"account": "tc_jv", "concept_id": "tc_jv", "current": 2000},
+
+    {"account": "tc_inventories", "concept_id": "tc_inventories", "current": 1000},
+    {"account": "tc_accounts_receivable", "concept_id": "tc_accounts_receivable", "current": 12000},
+    {"account": "tc_murabaha", "concept_id": "tc_murabaha", "current": 5000},
+    {"account": "tc_cash", "concept_id": "tc_cash", "current": 9000},
+
+    {"account": "tc_share_cap", "concept_id": "tc_share_cap", "current": 30000},
+    {"account": "tc_statutory", "concept_id": "tc_statutory", "current": 8000},
+    {"account": "tc_retained", "concept_id": "tc_retained", "current": 15000},
+
+    {"account": "tc_borrowings_nc", "concept_id": "tc_borrowings_nc", "current": 15000},
+    {"account": "tc_lease_liab_nc", "concept_id": "tc_lease_liab_nc", "current": 6000},
+    {"account": "tc_eosb", "concept_id": "tc_eosb", "current": 4000},
+
+    {"account": "tc_borrowings_c", "concept_id": "tc_borrowings_c", "current": 5000},
+    {"account": "tc_accounts_payable", "concept_id": "tc_accounts_payable", "current": 7000},
+    {"account": "tc_accrued_expenses", "concept_id": "tc_accrued_expenses", "current": 1500},
+    {"account": "tc_zakat_tax_payable", "concept_id": "tc_zakat_tax_payable", "current": 1500},
+
+    {"account": "tc_revenue", "concept_id": "tc_revenue", "current": 40000},
+    {"account": "tc_cor", "concept_id": "tc_cor", "current": -22000},
+    {"account": "tc_sm", "concept_id": "tc_sm", "current": -3000},
+    {"account": "tc_ga", "concept_id": "tc_ga", "current": -4000},
+    {"account": "tc_dep", "concept_id": "tc_dep", "current": -5000},
+    {"account": "tc_finance_income", "concept_id": "tc_finance_income", "current": 300},
+    {"account": "tc_finance_costs", "concept_id": "tc_finance_costs", "current": -800},
+    {"account": "tc_zakat_tax", "concept_id": "tc_zakat_tax", "current": -500},
+
+    {"account": "tc_actuarial", "concept_id": "tc_actuarial", "current": -100},
+    {"account": "tc_fv_equity", "concept_id": "tc_fv_equity", "current": 50},
+    {"account": "tc_fx_translation", "concept_id": "tc_fx_translation", "current": 200}
+  ]
+}

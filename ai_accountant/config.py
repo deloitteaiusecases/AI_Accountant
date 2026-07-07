@@ -16,31 +16,18 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 # --- Model -------------------------------------------------------------------
 # The app's LLM. GPT-5.1 is the target model. Override via OPENAI_MODEL in .env.
+# Pinned to the DATED SNAPSHOT, not the floating "gpt-5.1" alias: the alias silently resolves to
+# whatever snapshot is current (it served "gpt-5.1-2025-11-13"), which would make AI proposals drift
+# on re-run. A pinned snapshot makes classifications reproducible. Bump deliberately, never silently.
 # NOTE: if the GPT-5.x family requires the Responses API rather than chat.completions,
 # adjust ai_accountant/llm/client.py — the model id is centralized here on purpose.
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.1")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.1-2025-11-13")
 
 
 def get_api_key(explicit: str | None = None) -> str | None:
     """Resolve the OpenAI API key: explicit arg (e.g. from the UI) wins, else env."""
     return explicit or os.getenv("OPENAI_API_KEY")
 
-
-# --- Paths -------------------------------------------------------------------
-SAMPLE_DATA_DIR = PROJECT_ROOT / "sample_data"
-SAMPLE_NOTE5_CSV = SAMPLE_DATA_DIR / "AMNB_Note5_All_Levels.csv"
-
-# --- Ingestion ---------------------------------------------------------------
-PROFILE_SAMPLE_ROWS = 5  # rows per table shown to the LLM (never raw bulk data)
-
-# --- Data hierarchy ----------------------------------------------------------
-LEVELS = ("L1", "L2", "L3", "L4")  # L4 = raw transactions ... L1 = FS face
-
-# --- Note 5 ground truth (SAR '000) — used to validate the cascade ----------
-# From sample_data/AMNB_Note5_All_Levels.csv (AMNB FY2025).
-NOTE5_GROUND_TRUTH = {
-    "FVTPL": 2_780_000,
-    "FVOCI": 12_350_000,
-    "Amortised Cost": 9_680_000,
-    "TOTAL": 24_810_000,
-}
+# (The legacy Note-5 cascade constants — SAMPLE_NOTE5_CSV / NOTE5_GROUND_TRUTH / PROFILE_SAMPLE_ROWS /
+# LEVELS — were removed with the cascade. The seed-driven master-FS engine reads its L0–L4 structure from
+# the trial balance and the archetype seed.)

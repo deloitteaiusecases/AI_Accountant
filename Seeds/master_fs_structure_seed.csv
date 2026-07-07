@@ -1,0 +1,66 @@
+statement,l0_section,l1_group,concept_id,canonical_concept,aljazira_label,saab_label,presence,order
+balance_sheet,ASSETS,,bs_cash,Cash and balances with the central bank (SAMA),Cash and balances with Saudi Central Bank (SAMA),Cash and balances with Saudi Central Bank (SAMA),both,10
+balance_sheet,ASSETS,,bs_due_from,"Due from banks and other financial institutions, net","Due from banks and other financial institutions, net","Due from banks and other financial institutions, net",both,20
+balance_sheet,ASSETS,,bs_investments,"Investments, net","Investments, net","Investments, net",both,30
+balance_sheet,ASSETS,,bs_deriv_pos,"Positive fair value of derivatives, net",Positive fair value of Shari'ah compliant derivatives,"Positive fair value of derivatives, net",both_naming_differs,40
+balance_sheet,ASSETS,,bs_loans,"Loans / financing, net","Financing, net","Loans and advances, net",both_naming_differs,50
+balance_sheet,ASSETS,,bs_associate,Investment in an associate,Investment in an associate,Investment in an associate,both,60
+balance_sheet,ASSETS,,bs_other_re,"Other real estate, net","Other real estate, net",,aljazira_only,70
+balance_sheet,ASSETS,,bs_ppe,"Property, equipment and right-of-use assets, net","Property, equipment, intangibles and right of use assets, net (combined)","Property, equipment and right of use assets (ROU), net",both_naming_differs,80
+balance_sheet,ASSETS,,bs_goodwill,"Goodwill and other intangibles, net",(included above in PP&E/intangibles),"Goodwill and other intangibles, net",saab_only,90
+balance_sheet,ASSETS,,bs_other_assets,Other assets,Other assets,Other assets,both,100
+balance_sheet,ASSETS,,bs_total_assets,Total assets,,,both,999
+balance_sheet,LIABILITIES,,bs_due_to,Due to banks and other financial institutions,"Due to banks, Saudi Central Bank and other financial institutions",Due to banks,both_naming_differs,110
+balance_sheet,LIABILITIES,,bs_deposits,Customers' deposits,Customers' deposits,Customers' deposits,both,120
+balance_sheet,LIABILITIES,,bs_deriv_neg,"Negative fair value of derivatives, net",Negative fair value of Shari'ah compliant derivatives,"Negative fair value of derivatives, net",both_naming_differs,130
+balance_sheet,LIABILITIES,,bs_debt_liab,Debt liabilities (sukuk / debt securities / term loans),Subordinated Sukuk,Debt securities in issue and term loans,both_naming_differs,140
+balance_sheet,LIABILITIES,,bs_other_liab,Other liabilities,Other liabilities,Other liabilities,both,150
+balance_sheet,LIABILITIES,,bs_total_liabilities,Total liabilities,,,both,999
+balance_sheet,EQUITY,,bs_share_cap,Share capital,Share capital,Share capital,both,160
+balance_sheet,EQUITY,,bs_share_prem,Share premium,,Share premium,saab_only,170
+balance_sheet,EQUITY,,bs_treasury,Treasury shares,Treasury shares,,aljazira_only,180
+balance_sheet,EQUITY,,bs_statutory,Statutory reserve,Statutory reserve,Statutory reserve,both,190
+balance_sheet,EQUITY,,bs_other_res,Other reserves,Other reserves,Other reserves,both,200
+balance_sheet,EQUITY,,bs_retained,Retained earnings,Retained earnings,Retained earnings,both,210
+balance_sheet,EQUITY,,bs_equity_residual,"Statutory reserve, retained earnings and treasury shares (net) — combined balancing residual",,,draft_only,215
+balance_sheet,EQUITY,,bs_proposed_div,Proposed dividends,,Proposed dividends,saab_only,220
+balance_sheet,EQUITY,,bs_tier1,Additional Tier 1 sukuk,Tier 1 Sukuk,Additional Tier 1 Sukuk,both_naming_differs,230
+balance_sheet,EQUITY,,bs_total_equity,Total equity,,,both,999
+balance_sheet,EQUITY,,bs_total_liab_equity,Total liabilities and equity,,,both,1000
+income_statement,OPERATING_INCOME,,pl_sci,Special commission / financing income,Income from investments and financing,Special commission income,both_naming_differs,10
+income_statement,OPERATING_INCOME,,pl_sce,Special commission / financing expense,Return on deposits and financial liabilities,Special commission expense,both_naming_differs,20
+income_statement,OPERATING_INCOME,,pl_net_sci,Net special commission / financing income (subtotal),Net financing and investment income,Net special commission income,both_naming_differs,30
+income_statement,OPERATING_INCOME,,pl_fee_inc,Fee and commission income,Fees from banking services - income,Fee and commission income,both_naming_differs,40
+income_statement,OPERATING_INCOME,,pl_fee_exp,Fee and commission expense,Fees from banking services - expense,Fee and commission expense,both_naming_differs,50
+income_statement,OPERATING_INCOME,,pl_net_fee,Net fee and commission income (subtotal),"Fees from banking services, net",Net fee and commission income,both_naming_differs,60
+income_statement,OPERATING_INCOME,,pl_fx,"Exchange income, net","Exchange income, net","Exchange income, net",both,70
+income_statement,OPERATING_INCOME,,pl_fvis,"Gains/(losses) on FVIS financial instruments, net",Net (loss)/gain on FVIS financial instruments,"Gain from FVSI financial instruments, net",both_naming_differs,80
+income_statement,OPERATING_INCOME,,pl_fvoci,"Gains/(losses) on FVOCI investments, net",Net loss on de-recognition of FVOCI debt,"Gain/(loss) on FVOCI debt instruments, net",both_naming_differs,90
+income_statement,OPERATING_INCOME,,pl_amortcost,"Gains/(losses) on amortised cost investments, net",,"Gain/(loss) on amortised cost investments, net",saab_only,100
+income_statement,OPERATING_INCOME,,pl_dividend,Dividend income,Dividend income,Dividend income,both,110
+income_statement,OPERATING_INCOME,,pl_other_inc,Other operating income,Other operating income,Other operating income,both,120
+income_statement,OPERATING_INCOME,,pl_total_inc,Total operating income (subtotal),Total operating income,Total operating income,both,130
+income_statement,OPERATING_EXPENSES,,pl_salaries,Salaries and employee-related expenses,Salaries and employee-related expenses,Salaries and employee related expenses,both,140
+income_statement,OPERATING_EXPENSES,,pl_rent,Rent and premises-related expenses,Rent and premises-related expenses,Rent and premises related expenses,both,150
+income_statement,OPERATING_EXPENSES,,pl_dep,Depreciation and amortisation,Depreciation and amortisation,Depreciation and amortization,both,160
+income_statement,OPERATING_EXPENSES,,pl_ga,Other general and administrative expenses,Other general and administrative expenses,General and administrative expenses,both_naming_differs,170
+income_statement,OPERATING_EXPENSES,,pl_other_exp,Other operating expenses,Other operating expenses,,aljazira_only,180
+income_statement,OPERATING_EXPENSES,,pl_impairment,"Impairment charge / provision for expected credit losses, net","Impairment charge for financing and other financial assets, net","Provision for expected credit losses, net",both_naming_differs,190
+income_statement,OPERATING_EXPENSES,,pl_total_exp,Total operating expenses (subtotal),Total operating expenses,Total operating expenses,both,200
+income_statement,RESULT,,pl_net_op,Net operating income / income from operating activities,Net operating income,Income from operating activities,both_naming_differs,210
+income_statement,RESULT,,pl_associate,Share in net income/earnings of an associate,Share in net income of an associate,Share in earnings of an associate,both_naming_differs,220
+income_statement,RESULT,,pl_nibz,Net income before zakat and income tax,Net income for the period before zakat and income tax,Net income for the year before Zakat and income tax,both,230
+income_statement,RESULT,,pl_zakat,Zakat,Zakat,Provision for Zakat,both_naming_differs,240
+income_statement,RESULT,,pl_tax,Income tax,Income tax,Provision for income tax,both_naming_differs,250
+income_statement,RESULT,,pl_net_income,Net income for the period/year,Net income for the period,Net income for the year after Zakat and income tax,both_naming_differs,260
+income_statement,RESULT,,pl_eps,Basic and diluted earnings per share,Basic and diluted earnings per share,Basic and diluted earnings per share,both,270
+comprehensive_income,COMPREHENSIVE_INCOME,,oci_ni,Net income for the period/year,Net income for the period,Net income for the year after Zakat and income tax,both,10
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will NOT be reclassified to P&L,oci_fvoci_eq,Net change in fair value of FVOCI equity instruments,Net changes in fair value of investments at FVOCI-equity,Net changes in fair value of FVOCI equity instruments,both_naming_differs,20
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will NOT be reclassified to P&L,oci_dbl,Re-measurement of defined benefit / actuarial,(actuarial gains — in other reserves),Re-measurement of defined benefit liability,both_naming_differs,30
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will NOT be reclassified to P&L,oci_assoc,Share in OCI of an associate,Share in other comprehensive income of an associate,(via associate),both_naming_differs,40
+comprehensive_income,COMPREHENSIVE_INCOME,Items that WILL be reclassified to P&L,oci_fvoci_debt,Net change in fair value of FVOCI debt instruments,Net changes in fair value of investments at FVOCI-debt,"Debt instrument at FVOCI — net changes in fair value, net",both_naming_differs,50
+comprehensive_income,COMPREHENSIVE_INCOME,Items that WILL be reclassified to P&L,oci_fvoci_xfer,Transfer of FVOCI debt to P&L on disposal,(via reserves),"Debt instrument at FVOCI — transfer to statement of income, net",both_naming_differs,60
+comprehensive_income,COMPREHENSIVE_INCOME,Items that WILL be reclassified to P&L,oci_cfh_change,Cash flow hedges — effective portion of change in fair value,Cash flow hedges - effective portion of change in fair value,Cash flow hedges - net changes in fair value,both_naming_differs,70
+comprehensive_income,COMPREHENSIVE_INCOME,Items that WILL be reclassified to P&L,oci_cfh_xfer,Cash flow hedges — transfer to P&L,Cash flow hedges - net amount transferred to statement of income,"Cash flow hedges - transfer to statement of income, net",both_naming_differs,80
+comprehensive_income,COMPREHENSIVE_INCOME,,oci_total_oci,Total other comprehensive income / (loss) (subtotal),Total other comprehensive income/(loss) for the period,Total other comprehensive income/(loss),both,90
+comprehensive_income,COMPREHENSIVE_INCOME,,oci_total_ci,Total comprehensive income for the period/year,Total comprehensive income for the period,Total comprehensive income for the year,both,100

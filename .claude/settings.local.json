@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python _dbg.py)",
+      "Bash(python _proto_i1.py)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_fsgen_mfs_app.py)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_static_breakdown.py)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_maturity_split.py)",
+      "Bash(OPENAI_API_KEY='' python -c ' *)",
+      "Bash(ls \"01\"*.xlsx TB_Test.xlsx)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_export_polish.py)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_bs_split.py)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_tb_ingest.py)",
+      "Bash(OPENAI_API_KEY=\"\" python tests/test_balance_sign_diagnosis.py)",
+      "Bash(export OPENAI_API_KEY=\"\")",
+      "Bash(python -c ' *)"
+    ]
+  }
+}

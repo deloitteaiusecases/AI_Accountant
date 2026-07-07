@@ -1,0 +1,226 @@
+{
+  "multileaf_full": {
+    "anchor": {
+      "coverage_pct": 100.0,
+      "gap": 0.0,
+      "status": "BUILT",
+      "uncovered": []
+    },
+    "internal_ties": true,
+    "nbv_by_class": {
+      "Buildings": 3400.0,
+      "Land": 1200.0,
+      "Motor Vehicles": 800.0,
+      "Plant and Machinery": 2050.0
+    },
+    "note_ref": "Property, plant and equipment",
+    "reconciles_to_tb": true,
+    "sections": [
+      {
+        "accum_dep": -2100.0,
+        "asset_class": "Buildings",
+        "cost": 5500.0,
+        "cost_accounts": [
+          "8102"
+        ],
+        "dep_accounts": [
+          "8152"
+        ],
+        "has_dep": true,
+        "is_land": false,
+        "missing_depreciation": false,
+        "nbv": 3400.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": 0.0,
+        "asset_class": "Land",
+        "cost": 1200.0,
+        "cost_accounts": [
+          "8101"
+        ],
+        "dep_accounts": [],
+        "has_dep": false,
+        "is_land": true,
+        "missing_depreciation": false,
+        "nbv": 1200.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": 0.0,
+        "asset_class": "Motor Vehicles",
+        "cost": 800.0,
+        "cost_accounts": [
+          "8104"
+        ],
+        "dep_accounts": [],
+        "has_dep": false,
+        "is_land": false,
+        "missing_depreciation": true,
+        "nbv": 800.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": -1450.0,
+        "asset_class": "Plant and Machinery",
+        "cost": 3500.0,
+        "cost_accounts": [
+          "8103"
+        ],
+        "dep_accounts": [
+          "8153"
+        ],
+        "has_dep": true,
+        "is_land": false,
+        "missing_depreciation": false,
+        "nbv": 2050.0,
+        "schedules_tie": true
+      }
+    ],
+    "sign_findings": [],
+    "tie_ok": true,
+    "total_accum_dep": -3550.0,
+    "total_cost": 11000.0,
+    "total_nbv": 7450.0
+  },
+  "multileaf_partial": {
+    "anchor": {
+      "coverage_pct": 66.7,
+      "gap": 0.0,
+      "status": "PARTIAL",
+      "uncovered": [
+        "P3"
+      ]
+    },
+    "internal_ties": true,
+    "nbv_by_class": {
+      "Buildings": 3400.0,
+      "Land": 1200.0,
+      "Plant and Machinery": 2050.0
+    },
+    "note_ref": "Property, plant and equipment",
+    "reconciles_to_tb": true,
+    "sections": [
+      {
+        "accum_dep": -2100.0,
+        "asset_class": "Buildings",
+        "cost": 5500.0,
+        "cost_accounts": [
+          "8102"
+        ],
+        "dep_accounts": [
+          "8152"
+        ],
+        "has_dep": true,
+        "is_land": false,
+        "missing_depreciation": false,
+        "nbv": 3400.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": 0.0,
+        "asset_class": "Land",
+        "cost": 1200.0,
+        "cost_accounts": [
+          "8101"
+        ],
+        "dep_accounts": [],
+        "has_dep": false,
+        "is_land": true,
+        "missing_depreciation": false,
+        "nbv": 1200.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": -1450.0,
+        "asset_class": "Plant and Machinery",
+        "cost": 3500.0,
+        "cost_accounts": [
+          "8103"
+        ],
+        "dep_accounts": [
+          "8153"
+        ],
+        "has_dep": true,
+        "is_land": false,
+        "missing_depreciation": false,
+        "nbv": 2050.0,
+        "schedules_tie": true
+      }
+    ],
+    "sign_findings": [],
+    "tie_ok": true,
+    "total_accum_dep": -3550.0,
+    "total_cost": 10200.0,
+    "total_nbv": 6650.0
+  },
+  "n0_single": {
+    "anchor": {
+      "coverage_pct": 100.0,
+      "gap": 0.0,
+      "status": "BUILT",
+      "uncovered": []
+    },
+    "internal_ties": true,
+    "nbv_by_class": {
+      "Buildings": 3400.0,
+      "Land": 1200.0,
+      "Plant and Machinery": 2050.0
+    },
+    "note_ref": "Property, plant and equipment",
+    "reconciles_to_tb": true,
+    "sections": [
+      {
+        "accum_dep": -2100.0,
+        "asset_class": "Buildings",
+        "cost": 5500.0,
+        "cost_accounts": [
+          "8102"
+        ],
+        "dep_accounts": [
+          "8152"
+        ],
+        "has_dep": true,
+        "is_land": false,
+        "missing_depreciation": false,
+        "nbv": 3400.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": 0.0,
+        "asset_class": "Land",
+        "cost": 1200.0,
+        "cost_accounts": [
+          "8101"
+        ],
+        "dep_accounts": [],
+        "has_dep": false,
+        "is_land": true,
+        "missing_depreciation": false,
+        "nbv": 1200.0,
+        "schedules_tie": true
+      },
+      {
+        "accum_dep": -1450.0,
+        "asset_class": "Plant and Machinery",
+        "cost": 3500.0,
+        "cost_accounts": [
+          "8103"
+        ],
+        "dep_accounts": [
+          "8153"
+        ],
+        "has_dep": true,
+        "is_land": false,
+        "missing_depreciation": false,
+        "nbv": 2050.0,
+        "schedules_tie": true
+      }
+    ],
+    "sign_findings": [],
+    "tie_ok": true,
+    "total_accum_dep": -3550.0,
+    "total_cost": 10200.0,
+    "total_nbv": 6650.0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "_about": "SYNTHETIC telecom GL (NOT real data) — carries ONLY the lease-liabilities maturity-split note, to exercise the G5 'confirm split' gate. The TB lumps the lease liability into a single non-current leaf (tc_lease_liab_nc = 6,000) and does NOT carry an independent current half, so the split is Case B: a MANAGEMENT JUDGMENT with no independent TB backstop. `lines` carry each movement line's label + amount + its KNOWN maturity (the demo's stand-in for the live maturity proposer's answer); the GUI calls the REAL propose_maturity_split on the labels to produce the classification, then the engine splits the amounts deterministically. The other declared telecom notes (PP&E, intangibles, right-of-use roll-forwards) are given NO GL here, so they render honestly as 'not generated' — never faked. note_total (6,000) ties to the lease TB line.",
+  "notes": {
+    "lease_liabilities": {
+      "note_total": 6000,
+      "lines": [
+        {"code": "LL-NC", "label": "Lease liabilities — payable after more than twelve months", "amount": 4000, "maturity": "non_current"},
+        {"code": "LL-C", "label": "Lease liabilities — current portion due within twelve months", "amount": 2000, "maturity": "current"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "Property, plant and equipment": {
+    "note_ref": "Property, plant and equipment",
+    "status": "BUILT",
+    "rows": [
+      {
+        "label": "Buildings",
+        "raw_sar": 1600.0,
+        "kind": "section",
+        "indent": 0
+      },
+      {
+        "label": "Opening",
+        "raw_sar": 2200.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Additions",
+        "raw_sar": 300.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Cost",
+        "raw_sar": 2500.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Opening",
+        "raw_sar": -750.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Depreciation charge",
+        "raw_sar": -200.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Disposals (accumulated depreciation)",
+        "raw_sar": 50.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Accumulated depreciation",
+        "raw_sar": -900.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Equipment",
+        "raw_sar": 400.0,
+        "kind": "section",
+        "indent": 0
+      },
+      {
+        "label": "Opening",
+        "raw_sar": 700.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Additions",
+        "raw_sar": 200.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Disposals (cost)",
+        "raw_sar": -100.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Cost",
+        "raw_sar": 800.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Opening",
+        "raw_sar": -350.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Depreciation charge",
+        "raw_sar": -100.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Disposals (accumulated depreciation)",
+        "raw_sar": 50.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Accumulated depreciation",
+        "raw_sar": -400.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Land",
+        "raw_sar": 1000.0,
+        "kind": "section",
+        "indent": 0
+      },
+      {
+        "label": "Opening",
+        "raw_sar": 900.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Additions",
+        "raw_sar": 100.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Cost",
+        "raw_sar": 1000.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "  Accumulated depreciation",
+        "raw_sar": 0.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Total — net book value",
+        "raw_sar": 3000.0,
+        "kind": "total",
+        "indent": 0
+      }
+    ]
+  },
+  "Goodwill and other intangibles": {
+    "note_ref": "Goodwill and other intangibles",
+    "status": "BUILT",
+    "rows": [
+      {
+        "label": "Goodwill",
+        "raw_sar": 600.0,
+        "kind": "section",
+        "indent": 0
+      },
+      {
+        "label": "Opening",
+        "raw_sar": 600.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Cost",
+        "raw_sar": 600.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "  Accumulated contra",
+        "raw_sar": 0.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Software",
+        "raw_sar": 200.0,
+        "kind": "section",
+        "indent": 0
+      },
+      {
+        "label": "Opening",
+        "raw_sar": 250.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Additions",
+        "raw_sar": 50.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Cost",
+        "raw_sar": 300.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Opening",
+        "raw_sar": -80.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "Amortization charge",
+        "raw_sar": -20.0,
+        "kind": "line",
+        "indent": 2
+      },
+      {
+        "label": "  Accumulated contra",
+        "raw_sar": -100.0,
+        "kind": "line",
+        "indent": 1
+      },
+      {
+        "label": "Total — net book value",
+        "raw_sar": 800.0,
+        "kind": "total",
+        "indent": 0
+      }
+    ]
+  },
+  "_note_status": {
+    "bs_ppe": "BUILT",
+    "bs_goodwill": "BUILT"
+  }
+}

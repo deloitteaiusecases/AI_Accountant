@@ -1,0 +1,71 @@
+statement,l0_section,l1_group,concept_id,canonical_concept,aljazira_label,saab_label,presence,order
+balance_sheet,NON_CURRENT_ASSETS,,tc_ppe,Property and equipment,,,mobily,10
+balance_sheet,NON_CURRENT_ASSETS,,tc_intangibles,Intangible assets,,,mobily,20
+balance_sheet,NON_CURRENT_ASSETS,,tc_rou,Right of use assets,,,mobily,30
+balance_sheet,NON_CURRENT_ASSETS,,tc_jv,Investment in joint venture,,,mobily,40
+balance_sheet,NON_CURRENT_ASSETS,,tc_contract_costs_nc,Contract costs — non-current,,,mobily,50
+balance_sheet,NON_CURRENT_ASSETS,,tc_contract_assets_nc,Contract assets — non-current,,,mobily,60
+balance_sheet,NON_CURRENT_ASSETS,,tc_fin_other_assets_nc,Financial and other assets — non-current,,,mobily,70
+balance_sheet,NON_CURRENT_ASSETS,,tc_total_nca,Total non-current assets,,,mobily,100
+balance_sheet,CURRENT_ASSETS,,tc_inventories,Inventories,,,mobily,110
+balance_sheet,CURRENT_ASSETS,,tc_contract_costs_c,Contract costs — current,,,mobily,120
+balance_sheet,CURRENT_ASSETS,,tc_contract_assets_c,Contract assets — current,,,mobily,130
+balance_sheet,CURRENT_ASSETS,,tc_accounts_receivable,Accounts receivable,,,mobily,140
+balance_sheet,CURRENT_ASSETS,,tc_due_from_rp,Due from related parties,,,mobily,150
+balance_sheet,CURRENT_ASSETS,,tc_fin_other_assets_c,Financial and other assets — current,,,mobily,160
+balance_sheet,CURRENT_ASSETS,,tc_murabaha,Short term Murabaha,,,mobily,170
+balance_sheet,CURRENT_ASSETS,,tc_cash,Cash and cash equivalents,,,mobily,180
+balance_sheet,CURRENT_ASSETS,,tc_total_ca,Total current assets,,,mobily,200
+balance_sheet,CURRENT_ASSETS,,tc_total_assets,Total assets,,,mobily,999
+balance_sheet,EQUITY,,tc_share_cap,Share capital,,,mobily,210
+balance_sheet,EQUITY,,tc_statutory,Statutory reserve,,,mobily,220
+balance_sheet,EQUITY,,tc_other_res,Other reserves,,,mobily,230
+balance_sheet,EQUITY,,tc_retained,Retained earnings,,,mobily,240
+balance_sheet,EQUITY,,tc_total_equity,Total shareholders' equity,,,mobily,300
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_borrowings_nc,Borrowings — non-current,,,mobily,310
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_lease_liab_nc,Lease liabilities — non-current,,,mobily,320
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_eosb,Provision for employees' end of service benefits,,,mobily,330
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_decommissioning,Provision for decommissioning,,,mobily,340
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_contract_liab_nc,Contract liabilities — non-current,,,mobily,350
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_fin_other_liab_nc,Financial and other liabilities — non-current,,,mobily,360
+balance_sheet,NON_CURRENT_LIABILITIES,,tc_total_ncl,Total non-current liabilities,,,mobily,400
+balance_sheet,CURRENT_LIABILITIES,,tc_borrowings_c,Borrowings — current,,,mobily,410
+balance_sheet,CURRENT_LIABILITIES,,tc_lease_liab_c,Lease liabilities — current,,,mobily,420
+balance_sheet,CURRENT_LIABILITIES,,tc_accounts_payable,Accounts payable,,,mobily,430
+balance_sheet,CURRENT_LIABILITIES,,tc_contract_liab_c,Contract liabilities — current,,,mobily,440
+balance_sheet,CURRENT_LIABILITIES,,tc_due_to_rp,Due to related parties,,,mobily,450
+balance_sheet,CURRENT_LIABILITIES,,tc_accrued_expenses,Accrued expenses,,,mobily,460
+balance_sheet,CURRENT_LIABILITIES,,tc_provisions,Provisions,,,mobily,470
+balance_sheet,CURRENT_LIABILITIES,,tc_zakat_tax_payable,Zakat and income tax (payable),,,mobily,480
+balance_sheet,CURRENT_LIABILITIES,,tc_fin_other_liab_c,Financial and other liabilities — current,,,mobily,490
+balance_sheet,CURRENT_LIABILITIES,,tc_total_cl,Total current liabilities,,,mobily,500
+balance_sheet,CURRENT_LIABILITIES,,tc_total_liabilities,Total liabilities,,,mobily,999
+balance_sheet,CURRENT_LIABILITIES,,tc_total_oe,Total shareholders' equity and liabilities,,,mobily,1000
+income_statement,REVENUE,,tc_revenue,Revenue,,,mobily,10
+income_statement,REVENUE,,tc_cor,Cost of revenue,,,mobily,20
+income_statement,REVENUE,,tc_gross_profit,Gross profit,,,mobily,30
+income_statement,OPERATING_EXPENSES,,tc_sm,Selling and marketing expenses,,,mobily,40
+income_statement,OPERATING_EXPENSES,,tc_ga,General and administrative expenses,,,mobily,50
+income_statement,OPERATING_EXPENSES,,tc_impairment,Impairment on accounts receivable and contract assets,,,mobily,60
+income_statement,OPERATING_EXPENSES,,tc_dep,Depreciation and amortization,,,mobily,70
+income_statement,OPERATING_EXPENSES,,tc_total_opex,Total operating expenses,,,mobily,80
+income_statement,OPERATING_EXPENSES,,tc_operating_profit,Operating profit,,,mobily,90
+income_statement,OTHER_INCOME_EXPENSE,,tc_share_jv,Share in profit of joint venture,,,mobily,100
+income_statement,OTHER_INCOME_EXPENSE,,tc_finance_income,Finance income,,,mobily,110
+income_statement,OTHER_INCOME_EXPENSE,,tc_finance_costs,Finance costs,,,mobily,120
+income_statement,OTHER_INCOME_EXPENSE,,tc_other_income,"Other income / (expenses), net",,,mobily,130
+income_statement,OTHER_INCOME_EXPENSE,,tc_total_other,Total other income and expenses,,,mobily,140
+income_statement,RESULT,,tc_nibz,Net profit before zakat and income tax,,,mobily,150
+income_statement,RESULT,,tc_zakat_tax,Zakat and income tax,,,mobily,160
+income_statement,RESULT,,tc_net_profit,Net profit,,,mobily,170
+income_statement,RESULT,,tc_eps,Basic and diluted earnings per share,,,mobily,180
+comprehensive_income,COMPREHENSIVE_INCOME,,tc_np,Net profit,,,mobily,10
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will not be reclassified subsequently to profit or loss,tc_actuarial,Actuarial remeasurement of employees' end of service benefits,,,mobily,20
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will not be reclassified subsequently to profit or loss,tc_fv_equity,Change in fair value of equity investments,,,mobily,30
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will not be reclassified subsequently to profit or loss,tc_total_not_reclass,Total items that will not be reclassified subsequently to profit or loss,,,mobily,40
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will be reclassified subsequently to profit or loss,tc_fx_translation,Exchange differences on translation of foreign operations,,,mobily,50
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will be reclassified subsequently to profit or loss,tc_cfh_change,Cash flow hedge - change in fair value,,,mobily,60
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will be reclassified subsequently to profit or loss,tc_cfh_reclass,Cash flow hedge - reclassified to profit or loss,,,mobily,70
+comprehensive_income,COMPREHENSIVE_INCOME,Items that will be reclassified subsequently to profit or loss,tc_total_reclass,Total items that will be reclassified subsequently to profit or loss,,,mobily,80
+comprehensive_income,COMPREHENSIVE_INCOME,,tc_total_oci,Other comprehensive income / (loss),,,mobily,90
+comprehensive_income,COMPREHENSIVE_INCOME,,tc_total_ci,Total comprehensive income for the period/year,,,mobily,100

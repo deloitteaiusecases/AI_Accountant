@@ -1,0 +1,23 @@
+{
+  "_about": "SYNTHETIC multi-leaf coverage (NOT real data). ONE concept (bs_ppe) fed by 3 mapped TB leaves: P1 = Land+Buildings, P2 = Plant, P3 = Motor vehicles. The GL covers only P1+P2 (classes Land/Buildings/Plant; NO motor vehicles) → P3 surfaces UNCOVERED → the note is PARTIAL, never a clean aggregate. Adding the motor-vehicles class covers P3 → BUILT. Proves real per-leaf attribution: covered subtotal (P1+P2 = 6650) reconciles; P3 (800) is excluded from BOTH sides and flagged.",
+  "gl_leaves": [
+    { "gl_account": "8101", "opening": 1000, "closing": 1200, "movement_by_ref": { "ADD-PURCH": 200 } },
+    { "gl_account": "8102", "opening": 5000, "closing": 5500, "movement_by_ref": { "ADD-PURCH": 1000, "DISP-COST": -500 } },
+    { "gl_account": "8152", "opening": -2000, "closing": -2100, "movement_by_ref": { "DEP-CHG": -300, "DISP-DEP": 200 } },
+    { "gl_account": "8103", "opening": 3000, "closing": 3500, "movement_by_ref": { "ADD-PURCH": 500 } },
+    { "gl_account": "8153", "opening": -1200, "closing": -1450, "movement_by_ref": { "DEP-CHG": -250 } }
+  ],
+  "confirmed": {
+    "8101": ["Land", "cost"], "8102": ["Buildings", "cost"], "8152": ["Buildings", "accumulated_contra"],
+    "8103": ["Plant and Machinery", "cost"], "8153": ["Plant and Machinery", "accumulated_contra"]
+  },
+  "attribution": { "Land": "P1", "Buildings": "P1", "Plant and Machinery": "P2" },
+  "concept_leaves": { "P1": 4600, "P2": 2050, "P3": 800 },
+  "covered_subtotal": 6650,
+  "motor_vehicles": {
+    "gl_leaf": { "gl_account": "8104", "opening": 700, "closing": 800, "movement_by_ref": { "ADD-PURCH": 100 } },
+    "confirmed": ["Motor Vehicles", "cost"],
+    "attribution_class": "Motor Vehicles",
+    "attribution_leaf": "P3"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "_about": "SYNTHETIC detailed bank GL (NOT real data) — CONSTRAINED so each note's closing foots EXACTLY to its synthetic-TB line. PP&E roll-forward (bs_ppe) → NBV 3,000; Goodwill & other intangibles roll-forward (bs_goodwill) → NBV 800 (goodwill exempt from amortization, software amortized). The bank's Loans/financing + ECL note (bs_loans) is the CONTRA/ECL variant, a mechanism NOT yet built — deliberately given NO GL here so it renders 'not generated', never forced through the roll-forward builder or faked. Each cost/contra schedule ties (opening + movements = closing). Roles are the mechanism roles cost | accumulated_contra. Sign convention: accumulated_contra negative.",
+  "sign_convention": {"accumulated_contra": "contra_negative", "disposals": "reduces_balance"},
+  "notes": {
+    "bs_ppe": {
+      "_target_nbv": 3000,
+      "leaves": [
+        {"gl_account": "BANK-LAND-COST", "opening": 900, "closing": 1000, "movement_by_ref": {"ADD-PURCH": 100}},
+        {"gl_account": "BANK-BLDG-COST", "opening": 2200, "closing": 2500, "movement_by_ref": {"ADD-PURCH": 300}},
+        {"gl_account": "BANK-BLDG-ADEP", "opening": -750, "closing": -900, "movement_by_ref": {"DEP-CHG": -200, "DISP-DEP": 50}},
+        {"gl_account": "BANK-EQIP-COST", "opening": 700, "closing": 800, "movement_by_ref": {"ADD-PURCH": 200, "DISP-COST": -100}},
+        {"gl_account": "BANK-EQIP-ADEP", "opening": -350, "closing": -400, "movement_by_ref": {"DEP-CHG": -100, "DISP-DEP": 50}}
+      ],
+      "confirmed": {
+        "BANK-LAND-COST": ["Land", "cost"],
+        "BANK-BLDG-COST": ["Buildings", "cost"],
+        "BANK-BLDG-ADEP": ["Buildings", "accumulated_contra"],
+        "BANK-EQIP-COST": ["Equipment", "cost"],
+        "BANK-EQIP-ADEP": ["Equipment", "accumulated_contra"]
+      }
+    },
+    "bs_goodwill": {
+      "_target_nbv": 800,
+      "leaves": [
+        {"gl_account": "BANK-GW-COST", "opening": 600, "closing": 600, "movement_by_ref": {}},
+        {"gl_account": "BANK-SW-COST", "opening": 250, "closing": 300, "movement_by_ref": {"ADD-PURCH": 50}},
+        {"gl_account": "BANK-SW-AAMORT", "opening": -80, "closing": -100, "movement_by_ref": {"AMORT-CHG": -20}}
+      ],
+      "confirmed": {
+        "BANK-GW-COST": ["Goodwill", "cost"],
+        "BANK-SW-COST": ["Software", "cost"],
+        "BANK-SW-AAMORT": ["Software", "accumulated_contra"]
+      }
+    }
+  }
+}

@@ -1,0 +1,1205 @@
+{
+  "balance_sheet": [
+    {
+      "canonical_concept": "Cash and balances with the central bank (SAMA)",
+      "components": [],
+      "concept_id": "bs_cash",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Cash and balances with Saudi Central Bank (SAMA)",
+        "saab": "Cash and balances with Saudi Central Bank (SAMA)"
+      },
+      "order": 10,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Due from banks and other financial institutions, net",
+      "components": [],
+      "concept_id": "bs_due_from",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Due from banks and other financial institutions, net",
+        "saab": "Due from banks and other financial institutions, net"
+      },
+      "order": 20,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Investments, net",
+      "components": [],
+      "concept_id": "bs_investments",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Investments, net",
+        "saab": "Investments, net"
+      },
+      "order": 30,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Positive fair value of derivatives, net",
+      "components": [],
+      "concept_id": "bs_deriv_pos",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Positive fair value of Shari'ah compliant derivatives",
+        "saab": "Positive fair value of derivatives, net"
+      },
+      "order": 40,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Loans / financing, net",
+      "components": [],
+      "concept_id": "bs_loans",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Financing, net",
+        "saab": "Loans and advances, net"
+      },
+      "order": 50,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Investment in an associate",
+      "components": [],
+      "concept_id": "bs_associate",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Investment in an associate",
+        "saab": "Investment in an associate"
+      },
+      "order": 60,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Other real estate, net",
+      "components": [],
+      "concept_id": "bs_other_re",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other real estate, net",
+        "saab": null
+      },
+      "order": 70,
+      "presence": "aljazira_only",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Property, equipment and right-of-use assets, net",
+      "components": [],
+      "concept_id": "bs_ppe",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Property, equipment, intangibles and right of use assets, net (combined)",
+        "saab": "Property, equipment and right of use assets (ROU), net"
+      },
+      "order": 80,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Goodwill and other intangibles, net",
+      "components": [],
+      "concept_id": "bs_goodwill",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "(included above in PP&E/intangibles)",
+        "saab": "Goodwill and other intangibles, net"
+      },
+      "order": 90,
+      "presence": "saab_only",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Other assets",
+      "components": [],
+      "concept_id": "bs_other_assets",
+      "kind": "leaf",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other assets",
+        "saab": "Other assets"
+      },
+      "order": 100,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Total assets",
+      "components": [
+        [
+          "+",
+          "bs_cash"
+        ],
+        [
+          "+",
+          "bs_due_from"
+        ],
+        [
+          "+",
+          "bs_investments"
+        ],
+        [
+          "+",
+          "bs_deriv_pos"
+        ],
+        [
+          "+",
+          "bs_loans"
+        ],
+        [
+          "+",
+          "bs_associate"
+        ],
+        [
+          "+",
+          "bs_other_re"
+        ],
+        [
+          "+",
+          "bs_ppe"
+        ],
+        [
+          "+",
+          "bs_goodwill"
+        ],
+        [
+          "+",
+          "bs_other_assets"
+        ]
+      ],
+      "concept_id": "bs_total_assets",
+      "kind": "total",
+      "l0_section": "ASSETS",
+      "l1_group": null,
+      "label_aliases": {},
+      "order": 999,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Due to banks and other financial institutions",
+      "components": [],
+      "concept_id": "bs_due_to",
+      "kind": "leaf",
+      "l0_section": "LIABILITIES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Due to banks, Saudi Central Bank and other financial institutions",
+        "saab": "Due to banks"
+      },
+      "order": 110,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Customers' deposits",
+      "components": [],
+      "concept_id": "bs_deposits",
+      "kind": "leaf",
+      "l0_section": "LIABILITIES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Customers' deposits",
+        "saab": "Customers' deposits"
+      },
+      "order": 120,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Negative fair value of derivatives, net",
+      "components": [],
+      "concept_id": "bs_deriv_neg",
+      "kind": "leaf",
+      "l0_section": "LIABILITIES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Negative fair value of Shari'ah compliant derivatives",
+        "saab": "Negative fair value of derivatives, net"
+      },
+      "order": 130,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Debt liabilities (sukuk / debt securities / term loans)",
+      "components": [],
+      "concept_id": "bs_debt_liab",
+      "kind": "leaf",
+      "l0_section": "LIABILITIES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Subordinated Sukuk",
+        "saab": "Debt securities in issue and term loans"
+      },
+      "order": 140,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Other liabilities",
+      "components": [],
+      "concept_id": "bs_other_liab",
+      "kind": "leaf",
+      "l0_section": "LIABILITIES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other liabilities",
+        "saab": "Other liabilities"
+      },
+      "order": 150,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Total liabilities",
+      "components": [
+        [
+          "+",
+          "bs_due_to"
+        ],
+        [
+          "+",
+          "bs_deposits"
+        ],
+        [
+          "+",
+          "bs_deriv_neg"
+        ],
+        [
+          "+",
+          "bs_debt_liab"
+        ],
+        [
+          "+",
+          "bs_other_liab"
+        ]
+      ],
+      "concept_id": "bs_total_liabilities",
+      "kind": "total",
+      "l0_section": "LIABILITIES",
+      "l1_group": null,
+      "label_aliases": {},
+      "order": 999,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Share capital",
+      "components": [],
+      "concept_id": "bs_share_cap",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Share capital",
+        "saab": "Share capital"
+      },
+      "order": 160,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Share premium",
+      "components": [],
+      "concept_id": "bs_share_prem",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": null,
+        "saab": "Share premium"
+      },
+      "order": 170,
+      "presence": "saab_only",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Treasury shares",
+      "components": [],
+      "concept_id": "bs_treasury",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Treasury shares",
+        "saab": null
+      },
+      "order": 180,
+      "presence": "aljazira_only",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Statutory reserve",
+      "components": [],
+      "concept_id": "bs_statutory",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Statutory reserve",
+        "saab": "Statutory reserve"
+      },
+      "order": 190,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Other reserves",
+      "components": [],
+      "concept_id": "bs_other_res",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other reserves",
+        "saab": "Other reserves"
+      },
+      "order": 200,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Retained earnings",
+      "components": [],
+      "concept_id": "bs_retained",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Retained earnings",
+        "saab": "Retained earnings"
+      },
+      "order": 210,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Proposed dividends",
+      "components": [],
+      "concept_id": "bs_proposed_div",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": null,
+        "saab": "Proposed dividends"
+      },
+      "order": 220,
+      "presence": "saab_only",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Additional Tier 1 sukuk",
+      "components": [],
+      "concept_id": "bs_tier1",
+      "kind": "leaf",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Tier 1 Sukuk",
+        "saab": "Additional Tier 1 Sukuk"
+      },
+      "order": 230,
+      "presence": "both_naming_differs",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Total equity",
+      "components": [
+        [
+          "+",
+          "bs_share_cap"
+        ],
+        [
+          "+",
+          "bs_share_prem"
+        ],
+        [
+          "-",
+          "bs_treasury"
+        ],
+        [
+          "+",
+          "bs_statutory"
+        ],
+        [
+          "+",
+          "bs_other_res"
+        ],
+        [
+          "+",
+          "bs_retained"
+        ],
+        [
+          "+",
+          "bs_proposed_div"
+        ],
+        [
+          "+",
+          "bs_tier1"
+        ]
+      ],
+      "concept_id": "bs_total_equity",
+      "kind": "total",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {},
+      "order": 999,
+      "presence": "both",
+      "statement": "balance_sheet"
+    },
+    {
+      "canonical_concept": "Total liabilities and equity",
+      "components": [
+        [
+          "+",
+          "bs_total_liabilities"
+        ],
+        [
+          "+",
+          "bs_total_equity"
+        ]
+      ],
+      "concept_id": "bs_total_liab_equity",
+      "kind": "total",
+      "l0_section": "EQUITY",
+      "l1_group": null,
+      "label_aliases": {},
+      "order": 1000,
+      "presence": "both",
+      "statement": "balance_sheet"
+    }
+  ],
+  "comprehensive_income": [
+    {
+      "canonical_concept": "Net income for the period/year",
+      "components": [],
+      "concept_id": "oci_ni",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net income for the period",
+        "saab": "Net income for the year after Zakat and income tax"
+      },
+      "order": 10,
+      "presence": "both",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Net change in fair value of FVOCI equity instruments",
+      "components": [],
+      "concept_id": "oci_fvoci_eq",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that will NOT be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "Net changes in fair value of investments at FVOCI-equity",
+        "saab": "Net changes in fair value of FVOCI equity instruments"
+      },
+      "order": 20,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Re-measurement of defined benefit / actuarial",
+      "components": [],
+      "concept_id": "oci_dbl",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that will NOT be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "(actuarial gains — in other reserves)",
+        "saab": "Re-measurement of defined benefit liability"
+      },
+      "order": 30,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Share in OCI of an associate",
+      "components": [],
+      "concept_id": "oci_assoc",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that will NOT be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "Share in other comprehensive income of an associate",
+        "saab": "(via associate)"
+      },
+      "order": 40,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Net change in fair value of FVOCI debt instruments",
+      "components": [],
+      "concept_id": "oci_fvoci_debt",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that WILL be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "Net changes in fair value of investments at FVOCI-debt",
+        "saab": "Debt instrument at FVOCI — net changes in fair value, net"
+      },
+      "order": 50,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Transfer of FVOCI debt to P&L on disposal",
+      "components": [],
+      "concept_id": "oci_fvoci_xfer",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that WILL be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "(via reserves)",
+        "saab": "Debt instrument at FVOCI — transfer to statement of income, net"
+      },
+      "order": 60,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Cash flow hedges — effective portion of change in fair value",
+      "components": [],
+      "concept_id": "oci_cfh_change",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that WILL be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "Cash flow hedges - effective portion of change in fair value",
+        "saab": "Cash flow hedges - net changes in fair value"
+      },
+      "order": 70,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Cash flow hedges — transfer to P&L",
+      "components": [],
+      "concept_id": "oci_cfh_xfer",
+      "kind": "leaf",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": "Items that WILL be reclassified to P&L",
+      "label_aliases": {
+        "aljazira": "Cash flow hedges - net amount transferred to statement of income",
+        "saab": "Cash flow hedges - transfer to statement of income, net"
+      },
+      "order": 80,
+      "presence": "both_naming_differs",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Total other comprehensive income / (loss) (subtotal)",
+      "components": [
+        [
+          "+",
+          "oci_fvoci_eq"
+        ],
+        [
+          "+",
+          "oci_dbl"
+        ],
+        [
+          "+",
+          "oci_assoc"
+        ],
+        [
+          "+",
+          "oci_fvoci_debt"
+        ],
+        [
+          "+",
+          "oci_fvoci_xfer"
+        ],
+        [
+          "+",
+          "oci_cfh_change"
+        ],
+        [
+          "+",
+          "oci_cfh_xfer"
+        ]
+      ],
+      "concept_id": "oci_total_oci",
+      "kind": "subtotal",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Total other comprehensive income/(loss) for the period",
+        "saab": "Total other comprehensive income/(loss)"
+      },
+      "order": 90,
+      "presence": "both",
+      "statement": "comprehensive_income"
+    },
+    {
+      "canonical_concept": "Total comprehensive income for the period/year",
+      "components": [
+        [
+          "+",
+          "oci_ni"
+        ],
+        [
+          "+",
+          "oci_total_oci"
+        ]
+      ],
+      "concept_id": "oci_total_ci",
+      "kind": "total",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Total comprehensive income for the period",
+        "saab": "Total comprehensive income for the year"
+      },
+      "order": 100,
+      "presence": "both",
+      "statement": "comprehensive_income"
+    }
+  ],
+  "income_statement": [
+    {
+      "canonical_concept": "Special commission / financing income",
+      "components": [],
+      "concept_id": "pl_sci",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Income from investments and financing",
+        "saab": "Special commission income"
+      },
+      "order": 10,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Special commission / financing expense",
+      "components": [],
+      "concept_id": "pl_sce",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Return on deposits and financial liabilities",
+        "saab": "Special commission expense"
+      },
+      "order": 20,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Net special commission / financing income (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_sci"
+        ],
+        [
+          "+",
+          "pl_sce"
+        ]
+      ],
+      "concept_id": "pl_net_sci",
+      "kind": "net",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net financing and investment income",
+        "saab": "Net special commission income"
+      },
+      "order": 30,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Fee and commission income",
+      "components": [],
+      "concept_id": "pl_fee_inc",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Fees from banking services - income",
+        "saab": "Fee and commission income"
+      },
+      "order": 40,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Fee and commission expense",
+      "components": [],
+      "concept_id": "pl_fee_exp",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Fees from banking services - expense",
+        "saab": "Fee and commission expense"
+      },
+      "order": 50,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Net fee and commission income (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_fee_inc"
+        ],
+        [
+          "+",
+          "pl_fee_exp"
+        ]
+      ],
+      "concept_id": "pl_net_fee",
+      "kind": "net",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Fees from banking services, net",
+        "saab": "Net fee and commission income"
+      },
+      "order": 60,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Exchange income, net",
+      "components": [],
+      "concept_id": "pl_fx",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Exchange income, net",
+        "saab": "Exchange income, net"
+      },
+      "order": 70,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Gains/(losses) on FVIS financial instruments, net",
+      "components": [],
+      "concept_id": "pl_fvis",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net (loss)/gain on FVIS financial instruments",
+        "saab": "Gain from FVSI financial instruments, net"
+      },
+      "order": 80,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Gains/(losses) on FVOCI investments, net",
+      "components": [],
+      "concept_id": "pl_fvoci",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net loss on de-recognition of FVOCI debt",
+        "saab": "Gain/(loss) on FVOCI debt instruments, net"
+      },
+      "order": 90,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Gains/(losses) on amortised cost investments, net",
+      "components": [],
+      "concept_id": "pl_amortcost",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": null,
+        "saab": "Gain/(loss) on amortised cost investments, net"
+      },
+      "order": 100,
+      "presence": "saab_only",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Dividend income",
+      "components": [],
+      "concept_id": "pl_dividend",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Dividend income",
+        "saab": "Dividend income"
+      },
+      "order": 110,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Other operating income",
+      "components": [],
+      "concept_id": "pl_other_inc",
+      "kind": "leaf",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other operating income",
+        "saab": "Other operating income"
+      },
+      "order": 120,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Total operating income (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_net_sci"
+        ],
+        [
+          "+",
+          "pl_net_fee"
+        ],
+        [
+          "+",
+          "pl_fx"
+        ],
+        [
+          "+",
+          "pl_fvis"
+        ],
+        [
+          "+",
+          "pl_fvoci"
+        ],
+        [
+          "+",
+          "pl_amortcost"
+        ],
+        [
+          "+",
+          "pl_dividend"
+        ],
+        [
+          "+",
+          "pl_other_inc"
+        ]
+      ],
+      "concept_id": "pl_total_inc",
+      "kind": "subtotal",
+      "l0_section": "OPERATING_INCOME",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Total operating income",
+        "saab": "Total operating income"
+      },
+      "order": 130,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Salaries and employee-related expenses",
+      "components": [],
+      "concept_id": "pl_salaries",
+      "kind": "leaf",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Salaries and employee-related expenses",
+        "saab": "Salaries and employee related expenses"
+      },
+      "order": 140,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Rent and premises-related expenses",
+      "components": [],
+      "concept_id": "pl_rent",
+      "kind": "leaf",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Rent and premises-related expenses",
+        "saab": "Rent and premises related expenses"
+      },
+      "order": 150,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Depreciation and amortisation",
+      "components": [],
+      "concept_id": "pl_dep",
+      "kind": "leaf",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Depreciation and amortisation",
+        "saab": "Depreciation and amortization"
+      },
+      "order": 160,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Other general and administrative expenses",
+      "components": [],
+      "concept_id": "pl_ga",
+      "kind": "leaf",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other general and administrative expenses",
+        "saab": "General and administrative expenses"
+      },
+      "order": 170,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Other operating expenses",
+      "components": [],
+      "concept_id": "pl_other_exp",
+      "kind": "leaf",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Other operating expenses",
+        "saab": null
+      },
+      "order": 180,
+      "presence": "aljazira_only",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Impairment charge / provision for expected credit losses, net",
+      "components": [],
+      "concept_id": "pl_impairment",
+      "kind": "leaf",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Impairment charge for financing and other financial assets, net",
+        "saab": "Provision for expected credit losses, net"
+      },
+      "order": 190,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Total operating expenses (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_salaries"
+        ],
+        [
+          "+",
+          "pl_rent"
+        ],
+        [
+          "+",
+          "pl_dep"
+        ],
+        [
+          "+",
+          "pl_ga"
+        ],
+        [
+          "+",
+          "pl_other_exp"
+        ],
+        [
+          "+",
+          "pl_impairment"
+        ]
+      ],
+      "concept_id": "pl_total_exp",
+      "kind": "subtotal",
+      "l0_section": "OPERATING_EXPENSES",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Total operating expenses",
+        "saab": "Total operating expenses"
+      },
+      "order": 200,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Net operating income / income from operating activities",
+      "components": [
+        [
+          "+",
+          "pl_total_inc"
+        ],
+        [
+          "+",
+          "pl_total_exp"
+        ]
+      ],
+      "concept_id": "pl_net_op",
+      "kind": "subtotal",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net operating income",
+        "saab": "Income from operating activities"
+      },
+      "order": 210,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Share in net income/earnings of an associate",
+      "components": [],
+      "concept_id": "pl_associate",
+      "kind": "leaf",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Share in net income of an associate",
+        "saab": "Share in earnings of an associate"
+      },
+      "order": 220,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Net income before zakat and income tax",
+      "components": [
+        [
+          "+",
+          "pl_net_op"
+        ],
+        [
+          "+",
+          "pl_associate"
+        ]
+      ],
+      "concept_id": "pl_nibz",
+      "kind": "subtotal",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net income for the period before zakat and income tax",
+        "saab": "Net income for the year before Zakat and income tax"
+      },
+      "order": 230,
+      "presence": "both",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Zakat",
+      "components": [],
+      "concept_id": "pl_zakat",
+      "kind": "leaf",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Zakat",
+        "saab": "Provision for Zakat"
+      },
+      "order": 240,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Income tax",
+      "components": [],
+      "concept_id": "pl_tax",
+      "kind": "leaf",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Income tax",
+        "saab": "Provision for income tax"
+      },
+      "order": 250,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Net income for the period/year",
+      "components": [
+        [
+          "+",
+          "pl_nibz"
+        ],
+        [
+          "+",
+          "pl_zakat"
+        ],
+        [
+          "+",
+          "pl_tax"
+        ]
+      ],
+      "concept_id": "pl_net_income",
+      "kind": "total",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Net income for the period",
+        "saab": "Net income for the year after Zakat and income tax"
+      },
+      "order": 260,
+      "presence": "both_naming_differs",
+      "statement": "income_statement"
+    },
+    {
+      "canonical_concept": "Basic and diluted earnings per share",
+      "components": [],
+      "concept_id": "pl_eps",
+      "kind": "leaf",
+      "l0_section": "RESULT",
+      "l1_group": null,
+      "label_aliases": {
+        "aljazira": "Basic and diluted earnings per share",
+        "saab": "Basic and diluted earnings per share"
+      },
+      "order": 270,
+      "presence": "both",
+      "statement": "income_statement"
+    }
+  ]
+}

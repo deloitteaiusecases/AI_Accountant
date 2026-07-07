@@ -1,0 +1,681 @@
+{
+  "description": "AUTHORED roll-up formulas for the master FS. Human-authored (Claude, for Sabahat/Abhishek review) against the real AlJazira + SAAB face structure. AI never authors these — it maps leaves only. Engine computes them deterministically.",
+  "sign_convention": "Amounts use the TB's native sign: income positive, expenses/zakat/tax stored NEGATIVE. Net-lines therefore use '+' on an expense whose stored value is already negative. If a client TB stores expenses as POSITIVE, the per-client mapping must record that and the signs flip — flag at confirm, do NOT silently assume.",
+  "rules": {
+    "kinds": "leaf=populated by mapped TB accounts; net=income-minus-expense face line; subtotal=intermediate roll-up; total=spine total (always renders).",
+    "render": "spine totals always render; net/subtotal render iff >=1 component present; empty intermediates hide (same as empty leaves).",
+    "derive_order": "topological — net-lines first, then subtotals that consume them, then spine totals; a total may reference another total (e.g. Total L&E = Total liabilities + Total equity).",
+    "orphan_guard": "every populated leaf must appear in exactly one section total's component closure; assert no populated leaf is missing from its section total.",
+    "balance_check": "Total assets vs Total liabilities and equity; mismatch -> non-blocking finding showing the difference, never auto-corrected."
+  },
+  "must_add_to_seed": [
+    "bs_total_assets",
+    "bs_total_liabilities",
+    "bs_total_equity",
+    "bs_total_liab_equity"
+  ],
+  "rollups": {
+    "bs_total_assets": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS",
+      "canonical": "Total assets",
+      "order": 999,
+      "components": [
+        [
+          "+",
+          "bs_cash"
+        ],
+        [
+          "+",
+          "bs_due_from"
+        ],
+        [
+          "+",
+          "bs_investments"
+        ],
+        [
+          "+",
+          "bs_deriv_pos"
+        ],
+        [
+          "+",
+          "bs_loans"
+        ],
+        [
+          "+",
+          "bs_associate"
+        ],
+        [
+          "+",
+          "bs_other_re"
+        ],
+        [
+          "+",
+          "bs_ppe"
+        ],
+        [
+          "+",
+          "bs_goodwill"
+        ],
+        [
+          "+",
+          "bs_other_assets"
+        ]
+      ]
+    },
+    "bs_total_liabilities": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "LIABILITIES",
+      "canonical": "Total liabilities",
+      "order": 999,
+      "components": [
+        [
+          "+",
+          "bs_due_to"
+        ],
+        [
+          "+",
+          "bs_deposits"
+        ],
+        [
+          "+",
+          "bs_deriv_neg"
+        ],
+        [
+          "+",
+          "bs_debt_liab"
+        ],
+        [
+          "+",
+          "bs_other_liab"
+        ]
+      ]
+    },
+    "bs_total_equity": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY",
+      "canonical": "Total equity",
+      "order": 999,
+      "components": [
+        [
+          "+",
+          "bs_share_cap"
+        ],
+        [
+          "+",
+          "bs_share_prem"
+        ],
+        [
+          "-",
+          "bs_treasury"
+        ],
+        [
+          "+",
+          "bs_statutory"
+        ],
+        [
+          "+",
+          "bs_other_res"
+        ],
+        [
+          "+",
+          "bs_retained"
+        ],
+        [
+          "+",
+          "bs_equity_residual"
+        ],
+        [
+          "+",
+          "bs_proposed_div"
+        ],
+        [
+          "+",
+          "bs_tier1"
+        ]
+      ]
+    },
+    "bs_total_liab_equity": {
+      "kind": "total",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY",
+      "canonical": "Total liabilities and equity",
+      "order": 1000,
+      "components": [
+        [
+          "+",
+          "bs_total_liabilities"
+        ],
+        [
+          "+",
+          "bs_total_equity"
+        ]
+      ]
+    },
+    "pl_net_sci": {
+      "kind": "net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME",
+      "canonical": "Net special commission / financing income (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_sci"
+        ],
+        [
+          "+",
+          "pl_sce"
+        ]
+      ]
+    },
+    "pl_net_fee": {
+      "kind": "net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME",
+      "canonical": "Net fee and commission income (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_fee_inc"
+        ],
+        [
+          "+",
+          "pl_fee_exp"
+        ]
+      ]
+    },
+    "pl_total_inc": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME",
+      "canonical": "Total operating income (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_net_sci"
+        ],
+        [
+          "+",
+          "pl_net_fee"
+        ],
+        [
+          "+",
+          "pl_fx"
+        ],
+        [
+          "+",
+          "pl_fvis"
+        ],
+        [
+          "+",
+          "pl_fvoci"
+        ],
+        [
+          "+",
+          "pl_amortcost"
+        ],
+        [
+          "+",
+          "pl_dividend"
+        ],
+        [
+          "+",
+          "pl_other_inc"
+        ]
+      ]
+    },
+    "pl_total_exp": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES",
+      "canonical": "Total operating expenses (subtotal)",
+      "components": [
+        [
+          "+",
+          "pl_salaries"
+        ],
+        [
+          "+",
+          "pl_rent"
+        ],
+        [
+          "+",
+          "pl_dep"
+        ],
+        [
+          "+",
+          "pl_ga"
+        ],
+        [
+          "+",
+          "pl_other_exp"
+        ],
+        [
+          "+",
+          "pl_impairment"
+        ]
+      ]
+    },
+    "pl_net_op": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "RESULT",
+      "canonical": "Net operating income / income from operating activities",
+      "components": [
+        [
+          "+",
+          "pl_total_inc"
+        ],
+        [
+          "+",
+          "pl_total_exp"
+        ]
+      ]
+    },
+    "pl_nibz": {
+      "kind": "subtotal",
+      "statement": "income_statement",
+      "l0_section": "RESULT",
+      "canonical": "Net income before zakat and income tax",
+      "components": [
+        [
+          "+",
+          "pl_net_op"
+        ],
+        [
+          "+",
+          "pl_associate"
+        ]
+      ]
+    },
+    "pl_net_income": {
+      "kind": "total",
+      "statement": "income_statement",
+      "l0_section": "RESULT",
+      "canonical": "Net income for the period/year",
+      "components": [
+        [
+          "+",
+          "pl_nibz"
+        ],
+        [
+          "+",
+          "pl_zakat"
+        ],
+        [
+          "+",
+          "pl_tax"
+        ]
+      ]
+    },
+    "oci_total_oci": {
+      "kind": "subtotal",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "canonical": "Total other comprehensive income / (loss) (subtotal)",
+      "components": [
+        [
+          "+",
+          "oci_fvoci_eq"
+        ],
+        [
+          "+",
+          "oci_dbl"
+        ],
+        [
+          "+",
+          "oci_assoc"
+        ],
+        [
+          "+",
+          "oci_fvoci_debt"
+        ],
+        [
+          "+",
+          "oci_fvoci_xfer"
+        ],
+        [
+          "+",
+          "oci_cfh_change"
+        ],
+        [
+          "+",
+          "oci_cfh_xfer"
+        ]
+      ]
+    },
+    "oci_total_ci": {
+      "kind": "total",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME",
+      "canonical": "Total comprehensive income for the period/year",
+      "components": [
+        [
+          "+",
+          "oci_ni"
+        ],
+        [
+          "+",
+          "oci_total_oci"
+        ]
+      ]
+    }
+  },
+  "leaves": [
+    {
+      "concept_id": "bs_cash",
+      "canonical": "Cash and balances with the central bank (SAMA)",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_due_from",
+      "canonical": "Due from banks and other financial institutions, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_investments",
+      "canonical": "Investments, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_deriv_pos",
+      "canonical": "Positive fair value of derivatives, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_loans",
+      "canonical": "Loans / financing, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_associate",
+      "canonical": "Investment in an associate",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_other_re",
+      "canonical": "Other real estate, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_ppe",
+      "canonical": "Property, equipment and right-of-use assets, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_goodwill",
+      "canonical": "Goodwill and other intangibles, net",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_other_assets",
+      "canonical": "Other assets",
+      "statement": "balance_sheet",
+      "l0_section": "ASSETS"
+    },
+    {
+      "concept_id": "bs_due_to",
+      "canonical": "Due to banks and other financial institutions",
+      "statement": "balance_sheet",
+      "l0_section": "LIABILITIES"
+    },
+    {
+      "concept_id": "bs_deposits",
+      "canonical": "Customers' deposits",
+      "statement": "balance_sheet",
+      "l0_section": "LIABILITIES"
+    },
+    {
+      "concept_id": "bs_deriv_neg",
+      "canonical": "Negative fair value of derivatives, net",
+      "statement": "balance_sheet",
+      "l0_section": "LIABILITIES"
+    },
+    {
+      "concept_id": "bs_debt_liab",
+      "canonical": "Debt liabilities (sukuk / debt securities / term loans)",
+      "statement": "balance_sheet",
+      "l0_section": "LIABILITIES"
+    },
+    {
+      "concept_id": "bs_other_liab",
+      "canonical": "Other liabilities",
+      "statement": "balance_sheet",
+      "l0_section": "LIABILITIES"
+    },
+    {
+      "concept_id": "bs_share_cap",
+      "canonical": "Share capital",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_share_prem",
+      "canonical": "Share premium",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_treasury",
+      "canonical": "Treasury shares",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_statutory",
+      "canonical": "Statutory reserve",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_other_res",
+      "canonical": "Other reserves",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_retained",
+      "canonical": "Retained earnings",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_equity_residual",
+      "canonical": "Statutory reserve, retained earnings and treasury shares (net) — combined balancing residual",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_proposed_div",
+      "canonical": "Proposed dividends",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "bs_tier1",
+      "canonical": "Additional Tier 1 sukuk",
+      "statement": "balance_sheet",
+      "l0_section": "EQUITY"
+    },
+    {
+      "concept_id": "pl_sci",
+      "canonical": "Special commission / financing income",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_sce",
+      "canonical": "Special commission / financing expense",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_fee_inc",
+      "canonical": "Fee and commission income",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_fee_exp",
+      "canonical": "Fee and commission expense",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_fx",
+      "canonical": "Exchange income, net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_fvis",
+      "canonical": "Gains/(losses) on FVIS financial instruments, net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_fvoci",
+      "canonical": "Gains/(losses) on FVOCI investments, net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_amortcost",
+      "canonical": "Gains/(losses) on amortised cost investments, net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_dividend",
+      "canonical": "Dividend income",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_other_inc",
+      "canonical": "Other operating income",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_INCOME"
+    },
+    {
+      "concept_id": "pl_salaries",
+      "canonical": "Salaries and employee-related expenses",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "pl_rent",
+      "canonical": "Rent and premises-related expenses",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "pl_dep",
+      "canonical": "Depreciation and amortisation",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "pl_ga",
+      "canonical": "Other general and administrative expenses",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "pl_other_exp",
+      "canonical": "Other operating expenses",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "pl_impairment",
+      "canonical": "Impairment charge / provision for expected credit losses, net",
+      "statement": "income_statement",
+      "l0_section": "OPERATING_EXPENSES"
+    },
+    {
+      "concept_id": "pl_associate",
+      "canonical": "Share in net income/earnings of an associate",
+      "statement": "income_statement",
+      "l0_section": "RESULT"
+    },
+    {
+      "concept_id": "pl_zakat",
+      "canonical": "Zakat",
+      "statement": "income_statement",
+      "l0_section": "RESULT"
+    },
+    {
+      "concept_id": "pl_tax",
+      "canonical": "Income tax",
+      "statement": "income_statement",
+      "l0_section": "RESULT"
+    },
+    {
+      "concept_id": "pl_eps",
+      "canonical": "Basic and diluted earnings per share",
+      "statement": "income_statement",
+      "l0_section": "RESULT"
+    },
+    {
+      "concept_id": "oci_ni",
+      "canonical": "Net income for the period/year",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_fvoci_eq",
+      "canonical": "Net change in fair value of FVOCI equity instruments",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_dbl",
+      "canonical": "Re-measurement of defined benefit / actuarial",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_assoc",
+      "canonical": "Share in OCI of an associate",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_fvoci_debt",
+      "canonical": "Net change in fair value of FVOCI debt instruments",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_fvoci_xfer",
+      "canonical": "Transfer of FVOCI debt to P&L on disposal",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_cfh_change",
+      "canonical": "Cash flow hedges - effective portion of change in fair value",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    },
+    {
+      "concept_id": "oci_cfh_xfer",
+      "canonical": "Cash flow hedges - transfer to P&L",
+      "statement": "comprehensive_income",
+      "l0_section": "COMPREHENSIVE_INCOME"
+    }
+  ]
+}

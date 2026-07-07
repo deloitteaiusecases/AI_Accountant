@@ -1,0 +1,736 @@
+{
+  "bank": null,
+  "extensions": [],
+  "findings": [],
+  "not_final": false,
+  "period_current": "31 December 2024",
+  "period_prior": "31 December 2023",
+  "provenance": [
+    [
+      "1001",
+      "Cash in hand and ATMs",
+      "Cash and balances with the central bank (SAMA)",
+      "preparer",
+      ""
+    ],
+    [
+      "1002",
+      "Current account with SAMA",
+      "Cash and balances with the central bank (SAMA)",
+      "preparer",
+      ""
+    ],
+    [
+      "1003",
+      "Statutory deposit with SAMA",
+      "Cash and balances with the central bank (SAMA)",
+      "preparer",
+      ""
+    ],
+    [
+      "1010",
+      "Money-market placements with banks",
+      "Due from banks and other financial institutions, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1011",
+      "Nostro current accounts",
+      "Due from banks and other financial institutions, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1020",
+      "FVOCI debt securities (sukuk)",
+      "Investments, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1021",
+      "FVIS mutual fund units",
+      "Investments, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1022",
+      "Amortised-cost government sukuk",
+      "Investments, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1023",
+      "FVOCI equity investments",
+      "Investments, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1030",
+      "Corporate Murabaha financing",
+      "Loans / financing, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1031",
+      "Retail personal financing",
+      "Loans / financing, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1032",
+      "Credit card receivables",
+      "Loans / financing, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1040",
+      "Land and buildings",
+      "Property, equipment and right-of-use assets, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1041",
+      "Right-of-use assets (leases)",
+      "Property, equipment and right-of-use assets, net",
+      "preparer",
+      ""
+    ],
+    [
+      "1050",
+      "Customers' liability under acceptances",
+      "Other assets",
+      "preparer",
+      ""
+    ],
+    [
+      "1060",
+      "Prepayments and sundry receivables",
+      "Other assets",
+      "preparer",
+      ""
+    ],
+    [
+      "2001",
+      "Interbank deposits taken",
+      "Due to banks and other financial institutions",
+      "preparer",
+      ""
+    ],
+    [
+      "2010",
+      "Demand deposits",
+      "Customers' deposits",
+      "preparer",
+      ""
+    ],
+    [
+      "2011",
+      "Savings accounts",
+      "Customers' deposits",
+      "preparer",
+      ""
+    ],
+    [
+      "2012",
+      "Time / term deposits",
+      "Customers' deposits",
+      "preparer",
+      ""
+    ],
+    [
+      "2020",
+      "Tier 2 sukuk issued",
+      "Debt liabilities (sukuk / debt securities / term loans)",
+      "preparer",
+      ""
+    ],
+    [
+      "2030",
+      "Accrued expenses and accounts payable",
+      "Other liabilities",
+      "preparer",
+      ""
+    ],
+    [
+      "2040",
+      "Zakat and income tax payable",
+      "Other liabilities",
+      "preparer",
+      ""
+    ],
+    [
+      "3001",
+      "Issued share capital",
+      "Share capital",
+      "preparer",
+      ""
+    ],
+    [
+      "3002",
+      "Statutory reserve",
+      "Statutory reserve",
+      "preparer",
+      ""
+    ],
+    [
+      "3003",
+      "Retained earnings",
+      "Retained earnings",
+      "preparer",
+      ""
+    ],
+    [
+      "3004",
+      "Additional Tier 1 sukuk",
+      "Additional Tier 1 sukuk",
+      "preparer",
+      ""
+    ],
+    [
+      "4001",
+      "Income from financing",
+      "Special commission / financing income",
+      "preparer",
+      ""
+    ],
+    [
+      "4002",
+      "Income from investments",
+      "Special commission / financing income",
+      "preparer",
+      ""
+    ],
+    [
+      "4010",
+      "Return paid on customer deposits",
+      "Special commission / financing expense",
+      "preparer",
+      ""
+    ],
+    [
+      "4020",
+      "Banking service fees",
+      "Fee and commission income",
+      "preparer",
+      ""
+    ],
+    [
+      "4030",
+      "Foreign exchange gains, net",
+      "Exchange income, net",
+      "preparer",
+      ""
+    ],
+    [
+      "4040",
+      "Staff salaries and benefits",
+      "Salaries and employee-related expenses",
+      "preparer",
+      ""
+    ],
+    [
+      "4041",
+      "Depreciation of PP&E and ROU assets",
+      "Depreciation and amortisation",
+      "preparer",
+      ""
+    ],
+    [
+      "4050",
+      "ECL impairment charge on financing",
+      "Impairment charge / provision for expected credit losses, net",
+      "preparer",
+      ""
+    ],
+    [
+      "5001",
+      "Change in FVOCI debt fair value",
+      "Net change in fair value of FVOCI debt instruments",
+      "preparer",
+      ""
+    ],
+    [
+      "5002",
+      "Change in FVOCI equity fair value",
+      "Net change in fair value of FVOCI equity instruments",
+      "preparer",
+      ""
+    ],
+    [
+      "9001",
+      "Sundry suspense — clearing account",
+      "Other assets",
+      "preparer",
+      ""
+    ],
+    [
+      "9002",
+      "Inter-branch control account",
+      "Other assets",
+      "preparer",
+      ""
+    ]
+  ],
+  "statements": {
+    "balance_sheet": [
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_cash",
+        "current": 11500000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Cash and balances with the central bank (SAMA)",
+        "new_concept": false,
+        "prior": 10050000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_due_from",
+        "current": 3100000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Due from banks and other financial institutions, net",
+        "new_concept": false,
+        "prior": 2750000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_investments",
+        "current": 26000000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Investments, net",
+        "new_concept": false,
+        "prior": 23500000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_loans",
+        "current": 78880000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Loans / financing, net",
+        "new_concept": false,
+        "prior": 75660000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_ppe",
+        "current": 1900000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Property, equipment and right-of-use assets, net",
+        "new_concept": false,
+        "prior": 1500000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_other_assets",
+        "current": 3220000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Other assets",
+        "new_concept": false,
+        "prior": 2860000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_total_assets",
+        "current": 124600000.0,
+        "derived": true,
+        "kind": "total",
+        "l1_group": null,
+        "label": "Total assets",
+        "new_concept": false,
+        "prior": 116320000.0,
+        "section": "ASSETS"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_due_to",
+        "current": 3500000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Due to banks and other financial institutions",
+        "new_concept": false,
+        "prior": 3100000.0,
+        "section": "LIABILITIES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_deposits",
+        "current": 89000000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Customers' deposits",
+        "new_concept": false,
+        "prior": 82500000.0,
+        "section": "LIABILITIES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_debt_liab",
+        "current": 5000000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Debt liabilities (sukuk / debt securities / term loans)",
+        "new_concept": false,
+        "prior": 5000000.0,
+        "section": "LIABILITIES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_other_liab",
+        "current": 2000000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Other liabilities",
+        "new_concept": false,
+        "prior": 1820000.0,
+        "section": "LIABILITIES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_total_liabilities",
+        "current": 99500000.0,
+        "derived": true,
+        "kind": "total",
+        "l1_group": null,
+        "label": "Total liabilities",
+        "new_concept": false,
+        "prior": 92420000.0,
+        "section": "LIABILITIES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_share_cap",
+        "current": 10000000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Share capital",
+        "new_concept": false,
+        "prior": 10000000.0,
+        "section": "EQUITY"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_statutory",
+        "current": 4200000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Statutory reserve",
+        "new_concept": false,
+        "prior": 3800000.0,
+        "section": "EQUITY"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_retained",
+        "current": 7900000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Retained earnings",
+        "new_concept": false,
+        "prior": 7100000.0,
+        "section": "EQUITY"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_tier1",
+        "current": 3000000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Additional Tier 1 sukuk",
+        "new_concept": false,
+        "prior": 3000000.0,
+        "section": "EQUITY"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_total_equity",
+        "current": 25100000.0,
+        "derived": true,
+        "kind": "total",
+        "l1_group": null,
+        "label": "Total equity",
+        "new_concept": false,
+        "prior": 23900000.0,
+        "section": "EQUITY"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "bs_total_liab_equity",
+        "current": 124600000.0,
+        "derived": true,
+        "kind": "total",
+        "l1_group": null,
+        "label": "Total liabilities and equity",
+        "new_concept": false,
+        "prior": 116320000.0,
+        "section": "EQUITY"
+      }
+    ],
+    "comprehensive_income": [
+      {
+        "ai_assumed": false,
+        "concept_id": "oci_ni",
+        "current": 3130000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Net income for the period/year",
+        "new_concept": false,
+        "prior": 2930000.0,
+        "section": "COMPREHENSIVE_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "oci_fvoci_eq",
+        "current": 90000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": "Items that will NOT be reclassified to P&L",
+        "label": "Net change in fair value of FVOCI equity instruments",
+        "new_concept": false,
+        "prior": 60000.0,
+        "section": "COMPREHENSIVE_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "oci_fvoci_debt",
+        "current": 220000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": "Items that WILL be reclassified to P&L",
+        "label": "Net change in fair value of FVOCI debt instruments",
+        "new_concept": false,
+        "prior": -140000.0,
+        "section": "COMPREHENSIVE_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "oci_total_oci",
+        "current": 310000.0,
+        "derived": true,
+        "kind": "subtotal",
+        "l1_group": null,
+        "label": "Total other comprehensive income / (loss) (subtotal)",
+        "new_concept": false,
+        "prior": -80000.0,
+        "section": "COMPREHENSIVE_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "oci_total_ci",
+        "current": 3440000.0,
+        "derived": true,
+        "kind": "total",
+        "l1_group": null,
+        "label": "Total comprehensive income for the period/year",
+        "new_concept": false,
+        "prior": 2850000.0,
+        "section": "COMPREHENSIVE_INCOME"
+      }
+    ],
+    "income_statement": [
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_sci",
+        "current": 6400000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Special commission / financing income",
+        "new_concept": false,
+        "prior": 5900000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_sce",
+        "current": -1900000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Special commission / financing expense",
+        "new_concept": false,
+        "prior": -1700000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_net_sci",
+        "current": 4500000.0,
+        "derived": true,
+        "kind": "net",
+        "l1_group": null,
+        "label": "Net special commission / financing income (subtotal)",
+        "new_concept": false,
+        "prior": 4200000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_fee_inc",
+        "current": 1300000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Fee and commission income",
+        "new_concept": false,
+        "prior": 1180000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_net_fee",
+        "current": 1300000.0,
+        "derived": true,
+        "kind": "net",
+        "l1_group": null,
+        "label": "Net fee and commission income (subtotal)",
+        "new_concept": false,
+        "prior": 1180000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_fx",
+        "current": 480000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Exchange income, net",
+        "new_concept": false,
+        "prior": 420000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_total_inc",
+        "current": 6280000.0,
+        "derived": true,
+        "kind": "subtotal",
+        "l1_group": null,
+        "label": "Total operating income (subtotal)",
+        "new_concept": false,
+        "prior": 5800000.0,
+        "section": "OPERATING_INCOME"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_salaries",
+        "current": -2100000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Salaries and employee-related expenses",
+        "new_concept": false,
+        "prior": -1950000.0,
+        "section": "OPERATING_EXPENSES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_dep",
+        "current": -350000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Depreciation and amortisation",
+        "new_concept": false,
+        "prior": -320000.0,
+        "section": "OPERATING_EXPENSES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_impairment",
+        "current": -700000.0,
+        "derived": false,
+        "kind": "leaf",
+        "l1_group": null,
+        "label": "Impairment charge / provision for expected credit losses, net",
+        "new_concept": false,
+        "prior": -600000.0,
+        "section": "OPERATING_EXPENSES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_total_exp",
+        "current": -3150000.0,
+        "derived": true,
+        "kind": "subtotal",
+        "l1_group": null,
+        "label": "Total operating expenses (subtotal)",
+        "new_concept": false,
+        "prior": -2870000.0,
+        "section": "OPERATING_EXPENSES"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_net_op",
+        "current": 3130000.0,
+        "derived": true,
+        "kind": "subtotal",
+        "l1_group": null,
+        "label": "Net operating income / income from operating activities",
+        "new_concept": false,
+        "prior": 2930000.0,
+        "section": "RESULT"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_nibz",
+        "current": 3130000.0,
+        "derived": true,
+        "kind": "subtotal",
+        "l1_group": null,
+        "label": "Net income before zakat and income tax",
+        "new_concept": false,
+        "prior": 2930000.0,
+        "section": "RESULT"
+      },
+      {
+        "ai_assumed": false,
+        "concept_id": "pl_net_income",
+        "current": 3130000.0,
+        "derived": true,
+        "kind": "total",
+        "l1_group": null,
+        "label": "Net income for the period/year",
+        "new_concept": false,
+        "prior": 2930000.0,
+        "section": "RESULT"
+      }
+    ]
+  },
+  "unit": "SAR'000"
+}

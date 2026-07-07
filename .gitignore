@@ -31,5 +31,11 @@ policy_samples/
 bundle_test/
 # clean accuracy-test dataset (reproduce via scripts/make_accuracy_test.py)
 accuracy_test/
+# real (obfuscated NEOM) SAP GL data — do not commit
+GL/
+# AI proposal working artifact (regenerate via the proposer)
+prepayments_ai_proposals.json
+# generated note exports (reproduce via scripts/export_notes_check.py)
+exports/
 # structured test-case library (reproduce via scripts/make_test_documents.py)
 test_documents/
