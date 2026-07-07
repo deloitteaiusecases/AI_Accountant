@@ -26,7 +26,7 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.1-2025-11-13")
 
 def get_api_key(explicit: str | None = None) -> str | None:
     """Resolve the OpenAI API key: explicit arg (e.g. from the UI) wins, else env."""
-    return explicit or "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"
+    return explicit or "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"
 
 # (The legacy Note-5 cascade constants — SAMPLE_NOTE5_CSV / NOTE5_GROUND_TRUTH / PROFILE_SAMPLE_ROWS /
 # LEVELS — were removed with the cascade. The seed-driven master-FS engine reads its L0–L4 structure from
