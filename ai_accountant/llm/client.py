@@ -47,7 +47,7 @@ class LLMClient:
     """
 
     def __init__(self, api_key: str | None = None, model: str | None = None):
-        key = "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"
+        key = get_api_key(api_key)
         if not key:
             raise LLMError("No OpenAI API key provided (set OPENAI_API_KEY or pass one in).")
         self._client = OpenAI(api_key=key)

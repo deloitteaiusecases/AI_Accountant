@@ -1,0 +1,20 @@
+[33ma6d67b6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m hopefully this fixes it - Zain
+[33m46b4e1d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fixed deployement issues - Zain
+[33m466bbe0[m Update config.py
+[33m9313eff[m Added Dev Container Folder
+[33m3c07a9b[m Update config.py
+[33m82f23c1[m Update config.py
+[33m2ac1955[m Update config.py
+[33maed83c6[m Update client.py
+[33m3dcdff7[m Update config.py
+[33mef1a473[m Initial commit
+[33mda2932d[m Add structured test-case library generator (scripts/make_test_documents.py)
+[33m3fdc6ef[m L2 classification summary: detailed Note 5.1 breakdown (was coarse bucket totals)
+[33mf8b5ecb[m Fix: metric cards no longer compare uploads to the AMNB sample's totals
+[33m6527d2d[m Add clean accuracy-test dataset generator + exact-tie-out regression test
+[33m7d5c3f8[m Add 'dump everything' upload bundle generator (scripts/make_bundle.py)
+[33mfb1b3b4[m POC hardening: fuzzy policy match, streamed-file confidence, +2 controls, QA tests
+[33m4715dcd[m Phase 8 QA battery + sourced/validated policy docs
+[33md6219e9[m Phase 6 (part 1): NoteDefinition framework
+[33m04bf198[m Exports: include uploaded L4 tables (Excel) + all levels in PDF
+[33m3d22335[m Initial commit: AI Accountant (Phases 0-5 + 4b)
